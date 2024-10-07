@@ -16,7 +16,16 @@ def has_rrr(word):
             result = False
     return result
 
-word = input()
-result = has_rrr(word)
-print(result)
+# word = input()
+# result = has_rrr(word)
+# print(result)
+
+
+player_input = input('Введите два числа через пробел\nи мы заполним список четными числами, которые есть в промежутке.\nОба числе не входят в промежуток\n->')
+
+player_list = player_input.split (' ')
+player_max = max (int(player_list[0]), int(player_list[1]))
+player_min = min (int(player_list[0]), int(player_list[1]))
+
+[print (i) for i in range ((player_min+1), player_max) if i%2==0]
 
