@@ -2,6 +2,6 @@ python
 squirrel
 flask
 cucumbers
-bottele
+bottle
 flash
 room

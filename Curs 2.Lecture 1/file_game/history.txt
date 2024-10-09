@@ -5,3 +5,5 @@ Grim   40
 Алексей   10
 Cas   0
 Cas   70
+Vadim   50
+Vadim   50
