@@ -58,6 +58,10 @@ def main ():
             break
     print (f'Игра завершена, вы угадали {len(answers)} слов!')
 
-main()    
+main()
+
+class Player:
+    def __init__ (self, name, score):
+        self.name = name
 
 
