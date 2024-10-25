@@ -26,6 +26,7 @@ class BasicWord:
     def get_num_subwords(self):
         return len(self.subwords)
 
+
 class Player:
     def __init__(self, player_name, player_words=None):
         self.player_name = player_name
@@ -66,6 +67,7 @@ def load_random_word(path):
         print(f'Ошибка загрузки данных: {e}')
         return None
 
+
 def main():
     # Получаем данные для работы
     DATA_SOURCE = 'https://api.npoint.io/0e3ac92f25cd629e3fd4'
@@ -89,5 +91,6 @@ def main():
         else:
             break
     print(f'Игра завершена, вы угадали {player.get_num_player_words()} слов!')
+
 
 main()
