@@ -1,6 +1,6 @@
 My training repository
 ======================
-I made this repository for training and learning the Python capabilities.
+I made this repository for training and learning the Python's capabilities.
 ----------------------------------------------
 The repository is divided into courses:
 ***************************************
