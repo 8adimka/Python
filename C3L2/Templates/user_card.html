@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Карточка пользователя</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Карточка пользователя</h1>
+    <p>Имя пользователя: {{ username }}</p>
+    <p>Почта: {{ email }}</p>
+    <p>Телефон: {{ phone }}</p>
+</body>
+</html>
