@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список городов</title>
+</head>
+<body>
+    <ol>
+        {% for number, city in c_dict.items() %}
+            <li>{{ city }}</li>
+        {%endfor%}
+    </ol>
+</body>
+</html>
