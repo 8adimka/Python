@@ -10,5 +10,14 @@
             <li>{{ city }}</li>
         {%endfor%}
     </ol>
+
+    {% if results %}
+        {% if results in c_dict %}
+            <h2>{{ c_dict[results] }}</h2>
+            <p>Такой город есть в списке</p>
+        {% else %}
+            <h2>'Ошибкa r40r'</h2>
+        {% endif %}
+    {% endif %}
 </body>
 </html>
