@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка файла(Изм)</title>
+</head>
+<body>
+    <h1>Загрузка файла(изменено)</h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+	    <input type="text" name="folder" placeholder="Введите название папки">
+        <input type="submit" value="Загрузить">
+    </form>
+
+    {% if message %}
+        <p>{{ message|safe }}</p>
+    {% endif %}
+
+</body>
+</html>
