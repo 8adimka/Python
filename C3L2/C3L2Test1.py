@@ -52,7 +52,7 @@ def user_form():
     level = request.args.get('level', '')
 
     if username or level:
-        with open (r'C:\Users\m8adi\Desktop\Python\C3L2\records.txt', 'a', encoding='utf-8') as file:
+        with open (r'/home/v/Python/C3L2/records.txt', 'a', encoding='utf-8') as file:
             file.write (f'username : {username}, level : {level}\n')
     
     return render_template('user_form.html')
@@ -162,6 +162,33 @@ def upload_file3():
                     message = 'это не json'
     return render_template('file_load3.html', message=message)
 
+@app.route('/python')
+def python_page ():
+    return 'это язык который мы учим!'
+@app.route('/java')
+def java_page ():
+    return 'а это мы не учим'
+@app.route('/php')
+def php_page ():
+    return 'а это что такое вообще?'
+
+@app.route('/rl')
+def get_random_letter ():
+    alphabet = "ABCDEFGHIKLMNOPQRSTVXYZ"
+    return random.choice(alphabet)
+
+@app.route('/detect/<value>')
+def detect_value (value):
+    if value.isdigit():
+        return "это число"
+    else:
+        return "это не число"
+
+@app.route ('/avg')
+def get_average ():
+    numbers = [23, 16, 144, 72, 90, 11, 5]
+    average = sum (numbers) / len (numbers)
+    return f"{round(average, 2)}"
 
 if __name__ == "__main__":
     app.run()

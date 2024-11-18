@@ -1,40 +1,121 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    background-color: #696969;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; /* Вертикальный поток элементов */
+    align-items: center; /* Центрирует контент по горизонтали */
+    min-height: 100vh; /* Минимальная высота на весь экран */
+    /* height: 100vh; фиксированная высота body приводит к обрезанию контента*/
 }
 
-h1 {
-    color: #333;
+.container {
+    background: white;
+    border: 1px solid #8f8d8d;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 10, 97, 0.1);
+    padding: 20px;
+    width: 600px;
+    text-align: center;
 }
 
-form {
-    margin-bottom: 20px;
+.container h1 {
+    text-align: left;
+    font-size: 24px;
+    margin-bottom: 16px;
 }
 
-input[type="text"] {
-    padding: 8px;
+.container p {
+    text-align: left;
     font-size: 14px;
+    color: #555;
+    margin-bottom: 16px;
 }
 
-input[type="submit"] {
-    padding: 8px 16px;
-    font-size: 14px;
-    background-color: #333;
-    color: #fff;
-    border: none;
+.container .links {
+    display: flex; /* Выравнивает элементы в строку */
+    justify-content: flex-start; /* Выравнивает кнопки слева */
+    gap: 20px; /* Задает расстояние между кнопками */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.container .links a {
+    text-align: left;
+    text-decoration: underline; /* none - Убирает подчеркивание */
+    color: #ffffffe7; 
+    margin: 0 10;
+    padding: 10px 20px; /* Увеличивает внутренние отступы для размера кнопок */
+    font-size: 16px; /* размер текста */
+    background-color: #ffffff; /* Цвет фона кнопки */
+    border-radius: 5px; /* Закругляет углы */
+    color: #0a9fe4; /* Цвет текста */
+    font-weight: bold; /* Делает текст жирным */
+    display: inline-block; /* Делает ссылки как кнопки */
+    transition: background-color 0.3s ease; /* Добавляет эффект при наведении */
+    /* border: none; */
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
-    background-color: #555;
+.container .links a:hover {
+    background-color: #0a9fe4; /* Меняет цвет кнопки при наведении */
+    text-align: left;
+    text-decoration: underline;
+    color: #ffffff;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+.image {
+    max-width: 100%; /* Уменьшает ширину до размера контейнера */
+    height: auto; /* Сохраняет пропорции изображения */
+    display: block; /* Убирает лишнее пространство вокруг изображения */
+    margin: 0 auto; /* Центрует изображение внутри контейнера */
 }
 
-li {
-    padding: 4px 0;
-    font-size: 16px;
+/* Адаптация для мобильных устройств */
+@media screen and (max-width: 768px) {
+    body {
+        height: auto;
+        padding: 10px;
+        align-items: flex-start; /* Убираем выравнивание по центру */
+    }
+
+    .container {
+        width: 100%; /* Контейнер занимает всю ширину экрана */
+        padding: 15px; /* Уменьшаем отступы */
+        box-shadow: none; /* Убираем тень для более простого вида */
+    }
+
+    .container h1 {
+        font-size: 20px; /* Уменьшаем шрифт заголовков */
+        margin-bottom: 12px;
+    }
+
+    .container p {
+        font-size: 12px; /* Уменьшаем размер текста */
+    }
+
+    .links a {
+        font-size: 14px; /* Уменьшаем размер кнопок */
+        padding: 8px 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .container h1 {
+        font-size: 18px;
+    }
+
+    .container p {
+        font-size: 11px;
+    }
+
+    .links a {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
 }
