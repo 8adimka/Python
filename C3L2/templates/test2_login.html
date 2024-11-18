@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Должен корректно адаптировать ширину страницы под мобильные устройства. -->
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+    {% if result is none %}
+        <h1>Форма Входа пользователя:</h1>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Войти">
+        </form>
+    
+    {% else %}
+        {% if result == true %}
+            <div class="links">
+                <strong> <a href="/feed/">Вход успешный,<br>нажмите, чтобы перейти в ленту!</a> </strong>
+            </div>
+        {% else %}
+            <h2>Доступ запрещён</h2>
+        {% endif %}
+    {% endif %}
+    </div>
+</body>
+</html>
