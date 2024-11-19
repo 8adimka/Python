@@ -31,14 +31,14 @@ body {
     text-align: left;
     font-size: 14px;
     color: #555;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
 
 .container .links {
     display: flex; /* Выравнивает элементы в строку */
     justify-content: flex-start; /* Выравнивает кнопки слева */
     gap: 20px; /* Задает расстояние между кнопками */
-    margin-top: 20px; /* Отступ сверху */
+    margin-top: 5px; /* Отступ сверху */
 }
 
 .container .links a {
@@ -46,10 +46,10 @@ body {
     text-decoration: underline; /* none - Убирает подчеркивание */
     color: #ffffffe7; 
     margin: 0 10;
-    padding: 10px 20px; /* Увеличивает внутренние отступы для размера кнопок */
+    padding: 0px 20px; /* Увеличивает внутренние отступы для размера кнопок */
     font-size: 16px; /* размер текста */
     background-color: #ffffff; /* Цвет фона кнопки */
-    border-radius: 5px; /* Закругляет углы */
+    border-radius: 10px; /* Закругляет углы */
     color: #0a9fe4; /* Цвет текста */
     font-weight: bold; /* Делает текст жирным */
     display: inline-block; /* Делает ссылки как кнопки */

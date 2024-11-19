@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Должен корректно адаптировать ширину страницы под мобильные устройства +CSS -->
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Регистрация -</h1>
+        <img class="image" src="https://roll-club.dp.ua/wp-content/uploads/2024/02/pizza-recipe.jpg">
+        <p>Просто введите номер телефона</p>
+        <form method="get", action="/add/">
+            <input type="text" name="telephone" placeholder="+34 99 99 99 999">
+            <input type="submit" value="Зарегистрироваться">
+        </form>
+    </div>
+</body>
