@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Должен корректно адаптировать ширину страницы под мобильные устройства +CSS -->
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Что-нибудь еще добавить к заказу?</h1>
+        <hr>
+        <form method="get", action="/adress/">
+            <!-- Чекбоксы с подписями -->
+            <div class="links">
+                <input type="checkbox" id="cutlery" name="extra" value="1">
+                <label for="cutlery">Столовые приборы</label>
+            </div>
+            <div class="links">
+                <input type="checkbox" id="stics" name="extra" value="2">
+                <label for="stics">Палочки для еды</label>
+            </div>
+            <div class="links">
+                <input type="checkbox" id="gloves" name="extra" value="3">
+                <label for="gloves">Перчатки, чтобы есть руками</label>
+            </div>
+            <br>
+            <input type="submit" value="Продолжить">
+        </form>
+    </div>
+</body>    

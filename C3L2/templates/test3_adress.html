@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Должен корректно адаптировать ширину страницы под мобильные устройства +CSS -->
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Введите ваш адрес, куда доставить</h1>
+        <hr>
+        <form method="get", action="/contacts/">
+            <p>Город</p>
+            <div class="links">
+                <input type="text" name="town" placeholder="Куда везти?">
+            </div>
+            <p>Улица</p>
+            <div class="links">                
+                <input type="text" name="street" placeholder="Немного точнее">
+            </div>
+            <p>Дом, корпус и строение</p>
+            <div class="links">                
+                <input type="text" name="house" placeholder="Немного точнее">
+            </div>
+            <p>Пожелания и примечания, если есть</p>
+            <div class="links">           
+                <input type="text" name="additions">
+            </div>
+            <div class="links">
+                <input type="submit" value="Продолжить">
+            </div>
+        </form>
+    </div>
+</body>
