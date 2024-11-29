@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лента</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Лента</h1>
+        <p>
+            @grims<br>
+        </p>
+        <img class="image" src="https://loveopium.ru/content/2020/11/forest/00.jpg">
+        <p>
+            День 1 – очень много гуляли и смотрели на всякое устали и пошли домой. 
+        </p>
+        <br>
+        <hr>
+        <p>
+            @grims<br>
+        </p>
+        <img class="image" src="https://img.freepik.com/premium-photo/small-young-christmas-tree-grows-out-ground-fir-seedling-forest-background_230115-3450.jpg">
+        <p>
+            День 2 – было жарко и мы забрались в лес, в лесу расут маленькие елочки, но зимой тут +5-10, поэтому елочки не мерзнут.
+        </p>
+        <br>
+        <hr>
+            {% for post in publications %}
+                <div class="post">
+                    <p> {{ '@'+post.username }} </p>
+                    <img class="image" src="{{ url_for('static', filename='uploads/' + post.image) }}" alt="Image">
+                    <p>{{ post.description }}</p>
+                </div>
+                <hr>
+            {% endfor %}
+
+        <div class="links">
+            <strong> <a href="/load/">Опубликовать!</a> </strong>
+        </div>
+    </div>
+</body>
+</html>

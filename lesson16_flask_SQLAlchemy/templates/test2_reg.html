@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Должен корректно адаптировать ширину страницы под мобильные устройства. -->
+    <title>Начальная страница</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Myprogram</h1>
+        <img class="image" src="https://images.unsplash.com/photo-1490650034439-fd184c3c86a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" alt="Placeholder image">
+        <p>У нас тут фоточки и уютно.<br>Смотрите чужие, постите свои.</p>
+        <hr>
+        <div class="links">
+            <a href="/login">Войти</a>
+            <a href="/registr/">Регистрация</a>
+        </div>
+    </div>
+</body>
+</html>
