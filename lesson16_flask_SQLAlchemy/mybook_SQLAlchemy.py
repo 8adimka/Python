@@ -28,6 +28,7 @@ class Posts (db.Model):
     description = db.Column(db.String(1000))
     image = db.Column(db.String(1000))
 
+# Удаляем все уже созданные таблицы в случае если решили поменять модель
 # db.drop_all()
 
 # Создаём все объявленные выше таблицы в базе данных, если они отсутствуют
