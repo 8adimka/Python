@@ -60,8 +60,24 @@ def registr_page ():
 
     return render_template('test2_registr.html', result=result)
 
-@app.route('/login/', methods=['GET', 'POST'])
-def user_password():
+@app.route('/login/', methods=['GET'])
+def user_login_page():
+    return render_template('test2_login.html')
+
+
+@app.route('/login/fail', methods=['GET'])
+def user_login_true():
+    return render_template('test2_login_fail.html')
+
+
+@app.route('/login/success', methods=['GET'])
+def user_login_fail():
+    return render_template('test2_login_success.html')
+
+
+
+@app.route('/login/submit/', methods=['POST'])
+def user_login_handler():
     username = request.form.get('username', '').lower()
     password = request.form.get('password', '')
     result = None
@@ -78,7 +94,11 @@ def user_password():
                     result = True
                 else:
                     result = False
-    return render_template('test2_login.html', result=result)
+    if result == True: 
+        return redirect('/login/success', code=302)
+    else: 
+        return redirect('/login/fail', code=302)
+
 
 @app.route('/feed/', methods=['GET', 'POST'])
 def feed_page():

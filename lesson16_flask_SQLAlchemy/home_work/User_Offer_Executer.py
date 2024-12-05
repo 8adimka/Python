@@ -84,24 +84,44 @@ with app.app_context():
 #         print (user_data.first_name)
 #     return render_template ('users.html', **user_data)
 
+@app.route('/users/')
 @app.route('/users/<int:user>/')
 def user_page(user):
-    with app.app_context():
-        user_data = db.session.query(User).get(user)
-        if not user_data:
-            return f"User with ID {user} not found", 404
+    if user is None:
+        pass
+    else:
+        with app.app_context():
+            user_data = db.session.query(User).get(user)
+            if not user_data:
+                return f"User with ID {user} not found", 404
 
-        # Преобразование объекта в словарь
-        user_dict = {
-            "first_name": user_data.first_name,
-            "last_name": user_data.last_name,
-            "age": user_data.age,
-            "email": user_data.email,
-            "phone": user_data.phone,
-            "role": user_data.role,
-        }
+            # Преобразование объекта в словарь
+            user_dict = {
+                "first_name": user_data.first_name,
+                "last_name": user_data.last_name,
+                "age": user_data.age,
+                "email": user_data.email,
+                "phone": user_data.phone,
+                "role": user_data.role,
+            }
     return render_template('users.html', **user_dict)
 
+
+@app.route('/orders/<int:order>/')
+def order_page(order):
+    with app.app_context():
+        order_data = db.session.query(Order).get(order)
+        if not order_data:
+            return f"User with ID {user} not found", 404
+    return f"{order_data.name} - {order_data.price} US,<br/> description - {order_data.description}. Начало - {order_data.start_date} закончить до - {order_data.end_date}"
+
+@app.route('/offers/<int:offer>/')
+def offer_page(offer):
+    with app.app_context():
+        offer_data = db.session.query(Offer).get(offer)
+        if not offer_data:
+            return f"User with ID {user} not found", 404
+    return f"order_id - {offer_data.order_id}, executor_id - {offer_data.executor_id}"
 
 
 if __name__ == "__main__":

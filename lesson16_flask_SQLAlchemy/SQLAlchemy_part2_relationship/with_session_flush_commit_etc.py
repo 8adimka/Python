@@ -59,16 +59,16 @@ with app.app_context():
             print (f"Error: {e}")
             nested.rollback()
 
-        # raise Exception("unexpected exception") #исскуственно вызываем ошибку
+        raise Exception("unexpected exception") #исскуственно вызываем ошибку
         db.session.commit()
- 
-    except Exception as e: 
-# Теперь,если мы получим ошибку во вложенной транзакции,
-# мы обработаем ошибку вложенной транзакции,
-# если в основной, то перехватим и обработаем ошибку основной и откатим результат.
-        db.session.rollback()
-        
     
+    except Exception as e: 
+    # Теперь,если мы получим ошибку во вложенной транзакции,
+    # мы обработаем ошибку вложенной транзакции,
+    # если в основной, то перехватим и обработаем ошибку основной и откатим результат.
+        db.session.rollback()
+            
+        
 
     # user_with_group = User.query.get(1)
     # print(user_with_group.group.name)
@@ -77,4 +77,4 @@ with app.app_context():
     print(users)
     # print (users[0].name, users[1].name, users[5].name)
     for u in users:
-        print(u.name)
+        print(u.name, u.id)

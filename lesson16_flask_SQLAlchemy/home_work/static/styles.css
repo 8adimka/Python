@@ -1,12 +1,12 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #696969;
+    background-color: #dbdbdb;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    flex-direction: column; /* Вертикальный поток элементов */
-    align-items: center; /* Центрирует контент по горизонтали */
+    justify-content: flex-start; /* Контент прижимается к верхнему краю */
+    flex-direction: column; /* Вертикальный поток элементов, Элементы располагаются вертикально */
+    align-items: center; /* Центрирует контент по горизонтали */ /* align-items: flex-start; Выравнивание по левому краю */
     min-height: 100vh; /* Минимальная высота на весь экран */
     /* height: 100vh; фиксированная высота body приводит к обрезанию контента*/
 }

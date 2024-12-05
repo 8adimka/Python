@@ -7,24 +7,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-    {% if result is none %}
-        <h1>Форма Входа пользователя:</h1>
-        <form method="POST">
-            <input type="text" name="username" placeholder="Username">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Войти">
-        </form>
-    
-    {% else %}
-        {% if result == true %}
-            <div class="links">
-                <strong> <a href="/feed/">Вход успешный,<br>нажмите, чтобы перейти в ленту!</a> </strong>
-            </div>
-        {% else %}
-            <h2>Доступ запрещён</h2>
-        {% endif %}
-    {% endif %}
-    </div>
+<div class="container">
+    <h1>Форма Входа пользователя:</h1>
+    <form method="POST" action="/login/submit/">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Войти">
+    </form>
+</div>
 </body>
 </html>
