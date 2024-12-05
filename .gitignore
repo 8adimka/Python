@@ -1,2 +1,6 @@
 venv
 .vscode
+/home/v/Python/lesson16_flask_SQLAlchemy/for_Vadim_Barcelona/calendar.csv
+/home/v/Python/lesson16_flask_SQLAlchemy/for_Vadim_Barcelona/listings.csv
+/home/v/Python/lesson16_flask_SQLAlchemy/for_Vadim_Barcelona/reviews.csv
+
