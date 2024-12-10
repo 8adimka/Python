@@ -6,11 +6,21 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Карточка пользователя:</h1>
-    <p>Имя пользователя: {{ first_name }} {{ last_name }}</p>
-    <p>Возраст: {{ age }}</p>
-    <p>Почта: {{ email }}</p>
-    <p>Телефон: {{ phone }}</p>
-    <p>Роль: {{ role }}</p>
+    {% for user in results %}       
+        <h1>Карточка пользователя:</h1>
+        <p>Имя пользователя: {{ user.first_name }} {{ user.last_name }}</p>
+        <p>id: {{ user.id }}</p>
+        <p>Возраст: {{ user.age }}</p>
+        <p>Почта: {{ user.email }}</p>
+        <p>Телефон: {{ user.phone }}</p>
+        <p>Роль: {{ user.role }}</p>
+    {% endfor %}
+
+    <div class="container">
+        <form method="GET" action="/user/new/">
+            <input type="submit" value="Зарегистрировать нового пользователя">
+        </form>
+    </div>
+
 </body>
 </html>

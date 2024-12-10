@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Должен корректно адаптировать ширину страницы под мобильные устройства. -->
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+    {% if result is none %}
+        <h1>Форма нового пользователя:</h1>
+        <form method="GET">
+            <input type="text" name="first_name" placeholder="first_name">
+            <input type="text" name="last_name" placeholder="last_name">
+            <input type="text" name="age" placeholder="age">
+            <input type="email" name="email" placeholder="email">
+            <input type="phone" name="phone" placeholder="phone">
+            <br/>
+            <input type="radio" name="role" value="executor" checked> Executor
+            <input type="radio" name="role" value="customer"> Customer
+            <hr/>
+            <input type="submit" value="Зарегистрировать">
+        </form>
+    
+    {% else %}
+        <div class="links">
+            <strong> <a href="/users/">Новый пользователь успешно добавлен,<br>нажмите, чтобы перейти к списку пользователей!</a> </strong>
+        </div>
+    {% endif %}
+    </div>
+</body>
+</html>

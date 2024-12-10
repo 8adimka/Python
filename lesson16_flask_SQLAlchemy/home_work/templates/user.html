@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Карточка пользователя</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Карточка пользователя:</h1>
+    <p>Имя пользователя: {{ user_data.first_name }} {{ user_data.last_name }}</p>
+    <p>id: {{ user_data.id }}</p>
+    <p>Возраст: {{ user_data.age }}</p>
+    <p>Почта: {{ user_data.email }}</p>
+    <p>Телефон: {{ user_data.phone }}</p>
+    <p>Роль: {{ user_data.role }}</p>
+    <div class="container">
+        <form method="GET" action="/user/change/">
+            <input type="hidden" name="user_id" value="{{ user_data.id }}">
+            <input type="submit" value="Редактировать текущего пользователя">
+        </form>
+    </div>
+
+    <div class="container">
+        <form method="GET" action="/user/new/">
+            <input type="submit" value="Зарегистрировать нового пользователя">
+        </form>
+    </div>
+
+</body>
+</html>

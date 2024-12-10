@@ -61,6 +61,9 @@ with sqlite3.connect("/home/v/Python/lesson16_flask_SQLAlchemy/for_Vadim_Barcelo
             # Вставка данных из CSV в таблицу
             for row in csv_reader:
                 cursor.execute(insert_query, row)
+                
+            index_query = """CREATE INDEX id_indx ON listings (id); CREATE INDEX price_indx ON listings (price);"""
+            cursor.executescript(index_query)
             connection.commit()
             
 print ('Данные успешно добавлены в Базу Данных')
