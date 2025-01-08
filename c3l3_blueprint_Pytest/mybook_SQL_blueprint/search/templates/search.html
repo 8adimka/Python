@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лента</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Поиск</h1>
+        <form action="/search/" method="post">
+            <input type="text" name="search" placeholder="Поиск">
+            <button type="submit">Найти</button>
+        <h1>Лента</h1>
+        <hr>
+            {% for post in publications %}
+                <div class="post">
+                    <p> {{ '@'+post[0] }} </p>
+                    <img class="image" src="{{ url_for('static', filename='uploads/' + post[2]) }}" alt="Image">
+                    <p>{{ post[1] }}</p>
+                </div>
+                <hr>
+            {% endfor %}
+
+        <div class="links">
+            <strong> <a href="/load/">Опубликовать!</a> </strong>
+            <strong> <a href="/feed/">Или вернуться в общую ленту.</a> </strong>
+        </div>
+    </div>
+</body>
+</html>
