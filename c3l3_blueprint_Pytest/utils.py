@@ -52,3 +52,6 @@ def get_period(hour):
         return "день"   
     else:
         return "вечер"
+    
+def sum_func(a, b):
+    return a + b

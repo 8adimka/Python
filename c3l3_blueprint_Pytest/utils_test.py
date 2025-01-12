@@ -3,6 +3,7 @@ from utils import ticket_price
 from utils import get_circle_square
 from utils import get_verbal_grade
 from utils import get_period
+from utils import sum_func
 
 ticket_price_parameters = [(0, "Бесплатно"), (0.5, "Бесплатно"), (6, "Бесплатно"), (7, "100 рублей"), (17, "100 рублей"), (18, "200 рублей"), (24, "200 рублей"), (25, "300 рублей"), (59, "300 рублей"), (60, "Бесплатно"), (100, "Бесплатно"), (-1, "Ошибка")]
 @pytest.mark.parametrize("age, expected", ticket_price_parameters)
@@ -58,3 +59,36 @@ period_exceptions = [(25, ValueError), (-1, ValueError), ("5", TypeError), (5.0,
 def test_get_period_exceptions(hour, exception):
     with pytest.raises(exception):
         get_period(hour)
+
+
+
+@pytest.fixture()
+def positive_numbers():
+    return [1, 1]
+
+@pytest.fixture()
+def negative_numbers():
+    return [-10, -30]
+
+@pytest.fixture()
+def my_nice_values(): #  используем любое имя
+    return [6, -7]
+
+class TestSumFunc:
+
+    def test_sum_positive(self, positive_numbers):
+        c = sum_func(positive_numbers[0], positive_numbers[1])
+        assert c 	> 0
+        assert c == 2
+
+    def test_sum_negative(self, negative_numbers):
+        c = sum_func(negative_numbers[0], negative_numbers[1])
+        assert c 	< 0
+        assert c == -40
+
+    def test_sum_positive_and_negative(self, my_nice_values): #  обращаемся к фикстуре по имени
+        c = sum_func(
+					my_nice_values[0], 
+					my_nice_values[1]
+				)
+        assert c == -1
