@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Adela Hendricks",
+    "picture": "https://picsum.photos/200",
+    "position": "Go разработчик",
+    "gender": "female",
+    "age": 40,
+    "skills": "go, python"
+  },
+  {
+    "id": 2,
+    "name": "Sheri Torres",
+    "picture": "https://picsum.photos/200",
+    "position": "Delphi developer",
+    "gender": "female",
+    "age": 56,
+    "skills": "Delphi, pascal, fortran, basic"
+  },
+  {
+    "id": 3,
+    "name": "Luisa Mccarthy",
+    "picture": "https://picsum.photos/200",
+    "position": "Java developer",
+    "gender": "female",
+    "age": 35,
+    "skills": "java, kotlin, scala"
+  },
+  {
+    "id": 4,
+    "name": "Vadim Medintsev",
+    "picture": "https://picsum.photos/200",
+    "position": "Python developer",
+    "gender": "male",
+    "age": 34,
+    "skills": "python, django, flask"    
+  }
+]

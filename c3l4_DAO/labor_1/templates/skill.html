@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+{% for candidate in candidates %}
+    <p>{{ candidate.name }}</p>
+    <hr/>
+    <p>{{ candidate.position }}</p>
+    <p>{{ candidate.skills }}</p>
+    <hr/>
+    <hr/>
+    <br/>
+{% endfor %}
+</body>
+</html>
