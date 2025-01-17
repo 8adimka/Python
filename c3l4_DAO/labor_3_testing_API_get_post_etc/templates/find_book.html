@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Должен корректно адаптировать ширину страницы под мобильные устройства. -->
+    <title>Это страница для поиска книги</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Это страница для поиска книги</h1>
+        <br/>
+    <hr/>
+        <h2>Поиск</h2>
+        <form action="/search/" method="get">
+            <input type="text" name="s" placeholder="Поиск">
+            <button type="submit">Найти</button>
+        </form>
+    </div>
+</body>
+</html>

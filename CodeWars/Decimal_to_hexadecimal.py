@@ -12,3 +12,10 @@ def rgb(r, g, b):
 print(rgb(255, 255, 255))  # Output: FFFFFF
 print(rgb(255, 0, 0))      # Output: FF0000
 print(rgb(-20, 275, 125))  # Output: 00FF7D
+
+
+pl_input = float (input ('Введите число -> '))
+
+number = max(min(255, pl_input), 0)
+
+print (f'Ближайщее число к вашему в диапазоне от 0 до 255 -> {round (number)}')
