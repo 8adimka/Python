@@ -1,8 +1,8 @@
 import pytest
 
-from c3l4_DAO.practice_works.classes_getter import TodoList
-from c3l4_DAO.practice_works.classes_getter import Product
-from c3l4_DAO.practice_works.classes_getter import Cart
+from classes_getter import TodoList
+from classes_getter import Product
+from classes_getter import Cart
 
 class TestTodoList:
 
