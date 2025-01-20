@@ -1,5 +1,5 @@
 import pytest
-from get import app
+from get_search import app
 
 
 def test_all():
