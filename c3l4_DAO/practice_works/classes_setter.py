@@ -21,6 +21,9 @@ class Product:
         self.pk = Product._id_counter
         Product._id_counter += 1
 
+    def __repr__ (self):
+        return f"Product('{self.__name}', {self.__price})"
+
     @classmethod # @classmethod - используется для создания методов класса, которые привязаны к самому классу, а не к конкретному экземпляру
     def add_category(cls, category):
         """Добавляет новую категорию после подтверждения пользователя."""
