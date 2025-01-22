@@ -9,16 +9,18 @@ from units import (
     get_post_by_pk,
 )
 
-feed_blueprint = Blueprint ('feed_blueprint',
+search_blueprint = Blueprint ('search_blueprint',
                         __name__,
                         template_folder='templates',  # Указываем относительный путь к папке для шаблонов
                         static_folder='static'  # Указываем относительный путь к папке для статических файлов
                         )
 
-@feed_blueprint.route('/', methods=['GET', 'POST'])
+@search_blueprint.route('/search/', methods=['GET', 'POST'])
 def feed_page():
 
-    posts = get_posts_all()
+    s = request.form.get('search')
 
-    return render_template('user-feed.html', posts=posts)
+    posts = search_for_posts(s)
+    posts_count = len(posts)
 
+    return render_template('search.html', posts_count=posts_count, posts=posts)

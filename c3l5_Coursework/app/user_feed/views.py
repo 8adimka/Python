@@ -9,16 +9,15 @@ from units import (
     get_post_by_pk,
 )
 
-feed_blueprint = Blueprint ('feed_blueprint',
+usr_feed_blueprint = Blueprint ('usr_feed_blueprint',
                         __name__,
                         template_folder='templates',  # Указываем относительный путь к папке для шаблонов
                         static_folder='static'  # Указываем относительный путь к папке для статических файлов
                         )
 
-@feed_blueprint.route('/', methods=['GET', 'POST'])
-def feed_page():
+@usr_feed_blueprint.route('/users/<username>', methods=['GET', 'POST'])
+def usr_feed_page (username):
 
-    posts = get_posts_all()
+    posts = get_posts_by_user(username)
 
     return render_template('user-feed.html', posts=posts)
-

@@ -9,16 +9,17 @@ from units import (
     get_post_by_pk,
 )
 
-feed_blueprint = Blueprint ('feed_blueprint',
+post_blueprint = Blueprint ('post_blueprint',
                         __name__,
                         template_folder='templates',  # Указываем относительный путь к папке для шаблонов
                         static_folder='static'  # Указываем относительный путь к папке для статических файлов
                         )
 
-@feed_blueprint.route('/', methods=['GET', 'POST'])
-def feed_page():
+@post_blueprint.route('/post/<int:postid>', methods=['GET', 'POST'])
+def feed_page(postid):
 
-    posts = get_posts_all()
+    post = get_post_by_pk(postid)
+    comments = get_comments_by_post_id(postid)
+    comments_counter = len(comments)
 
-    return render_template('user-feed.html', posts=posts)
-
+    return render_template('post.html', post=post, comments=comments, comments_counter=comments_counter)
