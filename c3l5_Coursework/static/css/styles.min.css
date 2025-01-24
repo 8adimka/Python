@@ -11,6 +11,7 @@ body {
 	margin: 0
 }
 
+
 main {
 	display: block
 }
@@ -153,7 +154,7 @@ textarea {
 }
 
 [type="search"] {
-	-webkit-appearance: textfield;
+	appearance: textfield;
 	outline-offset: -2px
 }
 
@@ -200,9 +201,17 @@ p {
 	padding: 0
 }
 
-img {
-	height: auto
-}
+.item__bookmark-btn.bookmarked img {
+		filter: brightness(1.2);
+		height: auto;
+	  }
+	  
+.item__bookmark-btn img {
+		filter: grayscale(100%);
+		opacity: 0.6;
+		height: auto;
+	  }
+
 
 input,
 button,

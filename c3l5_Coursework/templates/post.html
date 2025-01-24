@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Study_Progect post</title>
-  <link href="../static/css/styles.min.css" rel="stylesheet">
+  <link href="../../static/css/styles.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -30,15 +30,24 @@
         <div class="item__top">
           <a href="/users/{{ post.poster_name }}" class="item__head">
             <div class="item__ava-wrap">
-              <img src="img/ava1.png" alt="" class="item__ava" width="47">
+              <img src="{{ post.poster_avatar }}" alt="" class="item__ava" width="47">
             </div>
             <span class="item__username">{{ post.poster_name }}</span>
           </a>
-          <button type="button" class="item__bookmark-btn">
-            <img src="{{ post.poster_avatar }}" alt="" class="item__bookmark-icon" width="24">
-          </button>
+          <form action="/toggle_bookmark" method="POST" class="bookmark-form">
+            <input type="hidden" name="post_id" value="{{ post.pk }}">
+            <button 
+              type="submit" 
+              class="item__bookmark-btn {% if post.pk in bookmarks %}bookmarked{% endif %}">
+              <img 
+                src="../../static/img/bookmark.png" 
+                alt="Bookmark" 
+                class="item__bookmark-icon" 
+                width="24">
+            </button>
+          </form>
         </div>
-        <a href="" class="item__post-link">
+        <a href="/users/{{ post.poster_name }}" class="item__post-link">
           <img src="{{ post.pic }}" alt="" width="348" class="item__post-img">
         </a>
         <div class="item__descr">
@@ -46,13 +55,15 @@
             {{ post.content }}
           </p>
           <p class="item__text">
+            {{ post.hashtags }} 
+            <br/>
             {{ post.likes_count }} лайков
           </div>
         <div class="item__bottom">
           <div class="item__post-info">
             <p class="item__comments-counter">{{comments_counter}} ком.</p>
             <div class="item__counter">
-              <img src="../static/img/eye.png" alt="" class="item__counter-icon" width="26">
+              <img src="../../static/img/eye.png" alt="" class="item__counter-icon" width="26">
               <span class="item__counter-text">Количество просмотров: {{ post.views_count }}</span>
             </div>
           </div>

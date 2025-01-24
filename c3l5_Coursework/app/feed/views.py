@@ -7,6 +7,7 @@ from units import (
     get_comments_by_post_id,
     search_for_posts,
     get_post_by_pk,
+    load_bookmarks
 )
 
 feed_blueprint = Blueprint ('feed_blueprint',
@@ -19,6 +20,8 @@ feed_blueprint = Blueprint ('feed_blueprint',
 def feed_page():
 
     posts = get_posts_all()
+    bookmarks = load_bookmarks()
+    bookmarks_ids = [bookmark['pk'] for bookmark in bookmarks]
 
-    return render_template('user-feed.html', posts=posts)
+    return render_template('user-feed.html', posts=posts, bookmarks_ids=bookmarks_ids)
 

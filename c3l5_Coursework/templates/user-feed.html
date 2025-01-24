@@ -29,8 +29,12 @@
             <input type="text" name="search" placeholder="Поиск">
             <button type="submit">Найти</button>
             <hr />
-            <br />
         </form>
+      <form action="/bookmarks/" method="post">
+          <button type="checkbox">В закладки!</button>
+          <hr />
+          <br />
+      </form>
       {% for post in posts %}
       <div class="items__item item">
         <div class="item__top">
@@ -45,8 +49,7 @@
           <img src="{{ post.pic }}" alt="Post image" width="348" class="item__post-img">
         </a>
         <p class="item__descr">
-          <a href="/post/{{ post.pk }}" class="item__tag">#{{ post.content | truncate(20) }}</a> <!-- Подрезаем контент -->
-        </p>
+          <a href="/post/{{ post.pk }}" class="item__tag">{{ post.hashtags }}</a> <br/>{{ post.content | truncate(30) }}</p> <!-- Подрезаем контент -->
         <div class="item__post-info">
           <div class="item__counter">
             <img src="../static/img/eye.png" alt="Views" class="item__counter-icon" width="26">
@@ -55,9 +58,18 @@
         </div>
         <div class="item__post-bottom">
           <a href="/post/{{ post.pk }}" class="item__btn-more">Подробнее</a>
-          <button type="button" class="item__bookmark-btn">
-            <img src="../static/img/bookmark.png" alt="Bookmark" class="item__bookmark-icon" width="24">
-          </button>
+          <form action="/toggle_bookmark/" method="POST" class="bookmark-form">
+            <input type="hidden" name="post_id" value="{{ post.pk }}">
+            <button 
+              type="submit" 
+              class="item__bookmark-btn {% if post.pk in bookmarks_ids %}bookmarked{% endif %}">
+              <img 
+                src="../../static/img/bookmark.png" 
+                alt="Bookmark" 
+                class="item__bookmark-icon" 
+                width="24">
+            </button>
+          </form>
         </div>
       </div>
       {% endfor %}

@@ -19,6 +19,21 @@ COMMENTS_FILE = os.path.join(BASE_DIR, "../static/data/comments.json")
 def test_get_posts_all():
     with open(POSTS_FILE, 'r', encoding="utf-8") as file:
         posts_data = json.load(file)
+        
+        for post in posts_data:
+            # Разделяем текст в 'content' на список слов
+            content_list = post['content'].split()
+            
+            # Отбираем хэштеги
+            hashtags = ' '.join([word for word in content_list if word.startswith('#')])
+            
+            # Убираем хэштеги из текста
+            content = ' '.join([word for word in content_list if not word.startswith('#')])
+            
+            # Обновляем словарь поста
+            post['hashtags'] = hashtags
+            post['content'] = content
+
     posts = get_posts_all()
     # Сравниваем количество постов
     assert len(posts) == len(posts_data)

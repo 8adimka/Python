@@ -15,7 +15,7 @@ post_blueprint = Blueprint ('post_blueprint',
                         static_folder='static'  # Указываем относительный путь к папке для статических файлов
                         )
 
-@post_blueprint.route('/post/<int:postid>', methods=['GET', 'POST'])
+@post_blueprint.route('/post/<int:postid>/', methods=['GET', 'POST'])
 def feed_page(postid):
 
     post = get_post_by_pk(postid)
