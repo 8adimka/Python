@@ -26,9 +26,15 @@ class Group(db.Model):
 
     users = relationship("User", back_populates="group")
 
+
 # Подготовка данных
 group_1 = Group(name="Group #1")
 group_2 = Group(name="Group #2")
+
+with app.app_context():
+    db.create_all()
+    db.session.add_all([group_1,group_2])
+    db.session.commit()
 
 user_1 = User(passport_number = 1234, name="John", age=30, group=group_1)
 user_2 = User(name="Kate", age=32, group=group_2)
@@ -44,7 +50,6 @@ user_6 = User(name="Vas", age=31, group=group_2)
 # with db.session.begin():
 with app.app_context():
     try:
-        db.create_all()
         db.session.add (user_3)
         db.session.add (user_2)
 
@@ -59,7 +64,7 @@ with app.app_context():
             print (f"Error: {e}")
             nested.rollback()
 
-        raise Exception("unexpected exception") #исскуственно вызываем ошибку
+        # raise Exception("unexpected exception") #исскуственно вызываем ошибку
         db.session.commit()
     
     except Exception as e: 
@@ -75,6 +80,6 @@ with app.app_context():
     # print(user_with_group.name)
     users = User.query.all()
     print(users)
-    # print (users[0].name, users[1].name, users[5].name)
+    print (users[0].name, users[1].name, users[3].name)
     for u in users:
         print(u.name, u.id)

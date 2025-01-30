@@ -47,8 +47,13 @@ with app.app_context():
     user_with_group = User.query.get(3)
     print(user_with_group.group.name)
     print(user_with_group.name)
+    user_with_group = User.query.get(1)
+
+    print ("______________________________________________________")
 
 
 if __name__ == '__main__':
-    app.run()
+    # app.run()
+    print(user_with_group.group.name)
+    print(user_with_group.name)
 

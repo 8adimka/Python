@@ -55,6 +55,21 @@ with app.app_context():
     print(user_with_group.group.name)
     print(user_with_group.name)
 
+    try:
+        user_7 = User(name="Criss", passport_number = 321, age=31) # passport_number - должен быть УНИКАЛЕН
+        user_6 = User(name="Criss", passport_number = 9513, age=18) # age >= 18
+        group_3 = Group(name="Group #3", users=[user_7,user_6])
+        db.session.add(group_3)
+        db.session.commit()
+    except Exception as e:
+        print (e)
+
+    query = db.session.query(User).join(Group).filter(Group.name == "Group #3")
+    users_with_group_3 = query.all()
+    for user in users_with_group_3:
+        print(user.group.name)
+        print(user.name)
+
     # Запросы данных
 
 # SELECT users.id AS users_id и т.д. ВСЁ
