@@ -44,7 +44,7 @@
     # возвращались гиды с нужным количеством туров.
 """
 
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from guides_sql import CREATE_TABLE, INSERT_VALUES
@@ -75,10 +75,55 @@ class Guide(db.Model):
 @app.route('/')
 def get_guides ():
     with app.app_context():
-        guides = Guide.query.all()
-        # response = [{'id' : guide.id, 'surname' : guide.surname, 'tours_count' : guide.tours_count} for guide in guides]
+        tours_count = request.args.get('tours_count')
+        if tours_count:
+            guides = db.session.query(Guide).filter(Guide.tours_count == tours_count)
+        else:
+            guides = Guide.query.all()
+            # response = [{'id' : guide.id, 'surname' : guide.surname, 'tours_count' : guide.tours_count} for guide in guides]
         response = [{k: v for k, v in guide.__dict__.items() if not k.startswith('_')} for guide in guides]
-    return json.dumps(response, ensure_ascii=False)
+        return json.dumps(response, ensure_ascii=False)
+
+@app.route('/<int:id>/')
+def get_guide_id(id):
+    with app.app_context():
+        guide = db.session.query(Guide).get(id)
+        if guide:
+            response = {k:v for k,v in guide.__dict__.items() if not k.startswith('_')}
+            return json.dumps(response, ensure_ascii=False)
+    return 'Данный пользователь не найден!'
+
+@app.route('/delete/<int:sid>')
+def delete_guide_id(sid):
+    with app.app_context():
+        try:
+            db.session.query(Guide).filter(Guide.id==sid).delete()
+            db.session.commit()
+            return "Пользователь удалён"
+        except Exception as e:
+            db.session.rollback()
+            print (f'Error: {e}, \nПользователь не найден!')
+
+@app.route('/guide/', methods=['POST', 'GET'])
+def create_guide():
+    with app.app_context():
+        try:
+            new_guide = Guide(**{
+            "surname": "Иванов",
+            "full_name": "Иван Иваныч",
+            "tours_count": 7,
+            "bio": "Провожу экскурсии",
+            "is_pro": True,
+            "company": "Удивительные экскурсии"})
+            db.session.add(new_guide)
+            db.session.commit()
+            return 'Пользователь добавлен'
+        except Exception as e:
+            print (f'Error {e} - cant add new_guide')
+            db.session.rollback()
+            return 'Пользователь НЕ добавлен'
+
+
 
 
 if __name__ == "__main__":

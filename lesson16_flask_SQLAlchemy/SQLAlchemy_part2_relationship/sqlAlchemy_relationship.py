@@ -13,7 +13,7 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False) #Не допускается null пустая ячейка, пропуск
-    age = db.Column(db.Integer) #Тип данных в SQLAlchemy чувствителен к регистру. Правильно -> db.Integer
+    age = db.Column(db.Integer, db.CheckConstraint("age >= 18")) #Проверка выполнения условия #Тип данных в SQLAlchemy чувствителен к регистру. Правильно -> db.Integer
     group_id = db.Column(db.Integer, db.ForeignKey("groups.id")) # SQLAlchemy чувствителен к регистру. Правильно -> db.ForeignKey
 
     group = relationship("Group", back_populates="users") #back_populates - создаёт обратную связь и по группе также можно получить пользователей в ней

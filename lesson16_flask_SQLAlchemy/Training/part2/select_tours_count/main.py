@@ -12,9 +12,10 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-with db.session.begin():
+with app.app_context():
     db.session.execute(text(CREATE_TABLE))
     db.session.execute(text(INSERT_VALUES))
+    db.session.commit()
 
 
 class Guide(db.Model):
@@ -29,8 +30,8 @@ class Guide(db.Model):
 
 
 def do_request():
-    # TODO напишите запрос здесь
-    pass
+    with app.app_context():
+        return db.session.query(Guide).filter(Guide.tours_count > 3).all()
 
 # не удаляйте код ниже, он необходим
 # для выдачи результата запроса

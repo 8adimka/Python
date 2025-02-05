@@ -62,7 +62,7 @@ if __name__ == '__main__':
         print (b.title, b.author.first_name, b.author.last_name)
     print('_______________')
     for book in my_request2:
-        print (book.title, book.Author.first_name)
+        print (book.title)
 
     # if book and book.author:
     #     print(f'Книга - {book.title}, \nАвтор - {book.author.first_name} {book.author.last_name}')
