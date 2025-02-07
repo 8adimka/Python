@@ -1,12 +1,15 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_restx import Api, Resource
 from marshmallow import Schema, fields
+from flask_marshmallow import Marshmallow
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_AS_ASCII'] = False
 db = SQLAlchemy(app)
+ma = Marshmallow(app)
 
 user_data = [
     {'id': 1, 'first_name': 'Hudson', 'last_name': 'Pauloh', 'age': 31, 'email': 'elliot16@mymail.com',
@@ -29,13 +32,16 @@ class User(db.Model):
     phone = db.Column(db.String(255))
 
 
-class UserSchema(Schema):
-    ...
+class UserSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        load_instance = True
 
 
-user_schema = UserSchema(many=True)
+users_schema = UserSchema(many=True)
+user_schema = UserSchema()
 
-# этот код наполняет БД, не трогайте е
+# этот код наполняет БД
 with app.app_context():
     db.drop_all()
     db.create_all()
@@ -44,11 +50,21 @@ with app.app_context():
     db.session.commit()
     print("База данных создана")
 
+api = Api(app)
+users_ns = api.namespace('users')
 
-@app.route("/users")
-def get_users():
 
-    ...
+@users_ns.route("/")
+class UsersView(Resource):
+    def get(self):
+        all_users = User.query.all()
+        return users_schema.dump(all_users), 200
+    
+@users_ns.route("/<int:user_id>")
+class UsersView(Resource):
+    def get(self, user_id):
+        user = User.query.get_or_404(user_id)
+        return user_schema.dump(user), 200
 
 
 app.run()

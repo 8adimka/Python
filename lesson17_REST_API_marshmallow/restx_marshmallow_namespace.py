@@ -90,7 +90,6 @@ class BooksView(Resource):
             new_book = book_schema.load(data_json) # Book(**data_json) Создаём объект из JSON
             db.session.add(new_book)
             db.session.commit()
-            # return jsonify(data_json), 201
             return book_schema.dump(new_book), 201
     
         except Exception as e:

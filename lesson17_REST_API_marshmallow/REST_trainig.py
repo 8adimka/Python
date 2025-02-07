@@ -117,7 +117,7 @@ def get_movies():
 def get_single_movie(movie_id):
     movie = db.session.query(Movie).get_or_404(movie_id)
 
-    return jsonify(movie)
+    return movie_schema.dump(movie), 200
 
 
 app.run()
