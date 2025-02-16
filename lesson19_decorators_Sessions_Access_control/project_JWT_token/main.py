@@ -48,6 +48,7 @@ from app.views.movies import movies_ns
 from app.views.directors import directors_ns
 from app.views.genres import genres_ns
 from app.views.users import users_ns
+from app.views.auth import auth_ns
 
 def create_app(config: Config) -> Flask:
     application = Flask(__name__)
@@ -63,6 +64,7 @@ def configure_app(application: Flask):
     api.add_namespace(directors_ns)
     api.add_namespace(genres_ns)
     api.add_namespace(users_ns)
+    api.add_namespace(auth_ns)
 
 
 if __name__ == '__main__':

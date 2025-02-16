@@ -3,6 +3,7 @@ from flask import request
 from flask_restx import Namespace, Resource
 from app.database import db
 from app.dao.models.users import UserSchema
+from app.helpers.decorators import admin_required
 
 users_ns = Namespace('users')
 
@@ -15,7 +16,16 @@ class UsersView(Resource):
         """GET all users"""
         username = request.args.get('username')
         all_users = user_service.get_all(username)
-        return users_schema.dump(all_users), 200
+        # Проверяем, список это или объект
+        if isinstance(all_users, list):
+            # Если список и одна запись - возвращаем как объект
+            if len(all_users) == 1:
+                return user_schema.dump(all_users[0]), 200
+            else:
+                return users_schema.dump(all_users), 200
+        else:
+            # Если пришёл один объект
+            return user_schema.dump(all_users), 200
     
     def post(self):
         """Make new record - user"""
@@ -53,6 +63,7 @@ class UserView(Resource):
 
         return user_schema.dump(user), 204
 
+    @admin_required
     def delete(self, user_id):
         """Delete user by ID"""
         user_service.delete(user_id)

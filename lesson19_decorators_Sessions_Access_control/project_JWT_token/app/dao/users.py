@@ -20,7 +20,7 @@ class UserDAO:
 
     def get_by_username(self, username):
         """GET filtered users"""
-        return self.session.query(User).filter(User.username == username).all()
+        return self.session.query(User).filter(User.username == username).first()
     
     def create (self, data):
         """Make new record - user"""

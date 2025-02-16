@@ -4,7 +4,7 @@ import jwt
 from flask import request, abort, Flask
 from flask_restx import Api, Resource
 
-from app.constants import secret, algo
+from app.helpers.constants import secret, algo
 
 def generate_token(data):
     min30 = datetime.datetime.utcnow() +  datetime.timedelta(minutes=30)
