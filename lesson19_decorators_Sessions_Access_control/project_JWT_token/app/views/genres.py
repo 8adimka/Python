@@ -22,7 +22,7 @@ class GenresView(Resource):
         try:
             data_json = request.json
             new_genre = genre_service.create(data_json)
-            return genre_schema.dump(new_genre), 201
+            return genre_schema.dump(new_genre), 201, {"location":f"/genres/{new_genre.id}"}
     
         except Exception as e:
             return f'Error {e}', 404

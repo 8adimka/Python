@@ -27,10 +27,28 @@ def auth_required(func):
         # data будет ~ 'Bearer eyJ0eXA..<token>'
         token = data.split("Bearer ")[-1]
         try:
-            jwt.decode(token, secret, algorithms=[algo])
+            jwt.decode(token, secret, algorithms=[algo]) # Просто, если удалось раскодировать - пускаем
         except Exception as e:
             print("JWT Decode Exception", e)
             abort(401)
         return func(*args, **kwargs)
     
+    return wrapper
+
+def admin_required(func):
+    def wrapper (*args, **kwargs):
+        data = data = request.headers.get('Authorization')
+        if not data:
+            abort (401)
+        token = data.split("Bearer ")[-1]
+        try:
+            user = jwt.decode(token, secret, algorithms=[algo])
+            role = user.get("role")
+            print (user['username'])
+        except Exception as e:
+            print("JWT Decode Exception:", e)
+            abort(401)
+        if role != 'admin':
+            abort (403)
+        return func (*args, **kwargs)
     return wrapper

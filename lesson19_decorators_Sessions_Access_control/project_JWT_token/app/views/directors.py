@@ -21,7 +21,7 @@ class DirectorsView(Resource):
         try:
             data_json = request.json
             new_director = director_service.create(data_json)
-            return director_schema.dump(new_director), 201
+            return director_schema.dump(new_director), 201, {"location":f"/directors/{new_director.id}"}
     
         except Exception as e:
             return f'Error {e}', 404

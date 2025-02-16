@@ -5,12 +5,24 @@ import unittest
 import inspect
 import main
 
-project_name = Path(os.path.abspath(__file__)).parent.parent.parent.name
-cwd = Path.cwd()
-parts = cwd.parts
-basefolder_index = parts.index(project_name)
-basepath = Path(*parts[:basefolder_index + 1])
-sys.path.append(str(basepath))
+# project_name = Path(os.path.abspath(__file__)).parent.parent.parent.name
+# cwd = Path.cwd()
+# parts = cwd.parts
+# if project_name in parts:
+#     basefolder_index = parts.index(project_name)
+# else:
+#     raise ValueError(f"Project name '{project_name}' not found in current working directory.")
+
+# basepath = Path(*parts[:basefolder_index + 1])
+# sys.path.append(str(basepath))
+# from ttools.skyprotests.tests import SkyproTestCase             # noqa: E402
+# from ttools.skyprotests.tests_mixins import ResponseTestsMixin  # noqa: E402
+
+# Определяем путь к корню проекта относительно местоположения этого скрипта
+project_root = Path(__file__).parent.parent.parent
+sys.path.append(str(project_root))
+
+# Импортируем тестовые миксины
 from ttools.skyprotests.tests import SkyproTestCase             # noqa: E402
 from ttools.skyprotests.tests_mixins import ResponseTestsMixin  # noqa: E402
 

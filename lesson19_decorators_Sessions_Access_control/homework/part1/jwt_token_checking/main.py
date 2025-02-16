@@ -6,7 +6,14 @@
 # И возвращайть False, если токен декодировать не удалось.
 
 # В тестах мы проверим функцию,отправив ей верный и неверный токен.
+import jwt
 
-def check_token(token, secret, algorithms):
-    # TODO напишите ваше решение здесь
-	pass
+secret = 's3cR$eT'
+algo = 'HS256'
+
+
+def check_token(token, secret, algo):
+    try:
+        return jwt.decode(token, secret, algorithms=[algo])
+    except Exception:
+        return False

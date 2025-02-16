@@ -2,7 +2,7 @@ from app.container import movie_service
 from flask import request
 from flask_restx import Namespace, Resource
 from app.database import db
-from app.dao.models.movies import Movie, MovieSchema
+from app.dao.models.movies import MovieSchema
 
 movies_ns = Namespace('movies')
 
@@ -23,7 +23,7 @@ class MoviesView(Resource):
         try:
             data_json = request.json
             new_movie = movie_service.create(data_json)
-            return movie_schema.dump(new_movie), 201
+            return movie_schema.dump(new_movie), 201, {"location":f"/movies/{new_movie.id}"}
     
         except Exception as e:
             return f'Error {e}', 404

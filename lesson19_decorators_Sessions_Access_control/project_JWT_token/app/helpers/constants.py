@@ -1,0 +1,2 @@
+JWT_SECRET = "some_S3cR&t_word1"
+JWT_ALGORITHM = "SHA256"

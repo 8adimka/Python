@@ -4,6 +4,7 @@ from app.database import db
 from app.dao.models.directors import Director
 from app.dao.models.genres import Genre
 from app.dao.models.movies import Movie
+from app.dao.models.users import User
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -236,6 +237,9 @@ def init_db(app):
                 genre_id=movie["genre_id"],
                 director_id=movie["director_id"]
             ))
+
+        user = User(username="root", password="random_password", role="admin")
+        db.session.add(user)
 
         db.session.commit()
         print("База данных успешно заполнена!")

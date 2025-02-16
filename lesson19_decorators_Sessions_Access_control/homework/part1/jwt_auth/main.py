@@ -24,8 +24,27 @@ secret = 's3cR$eT'
 token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IlNreXBybyIsInJvbGUiOiJhZG1pbiJ9.fMPkh9GNQMlLRxO0PmvCjUPPwX0t4CM5Wk4ATt35mNY"
 
 def auth_required(func):
-    # TODO напишите функцию-декоратор здесь
-    pass
+    def wrapper(*args, **kwargs):
+        # Проверяем наличие заголовка Authorization
+        auth_header = request.headers.get('Authorization')
+        if not auth_header:
+            abort(401)
+
+        # Проверяем префикс Bearer
+        token_parts = auth_header.split()
+        if len(token_parts) != 2 or token_parts[0] != 'Bearer':
+            abort(401)
+
+        # Декодируем токен
+        token = token_parts[1]
+        try:
+            jwt.decode(token, secret, algorithms=[algo])
+        except Exception as e:
+            print("JWT Decode Exception:", e)
+            abort(401)
+        
+        return func(*args, **kwargs)
+    return wrapper
 
 # Ниже следует код инициализации фласк приложения.
 # Из которого следует что GET-запрос на адрес books могут делать все
