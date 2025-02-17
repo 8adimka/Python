@@ -23,4 +23,4 @@ director_service = DirectorService(director_dao)
 user_dao = UserDAO(db.session)
 user_service = UserService(user_dao)
 
-auth_service = AuthService(UserService)
+auth_service = AuthService(user_service)

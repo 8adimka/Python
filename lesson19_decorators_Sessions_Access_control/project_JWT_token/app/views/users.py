@@ -14,18 +14,8 @@ user_schema = UserSchema()
 class UsersView(Resource):
     def get (self):
         """GET all users"""
-        username = request.args.get('username')
-        all_users = user_service.get_all(username)
-        # Проверяем, список это или объект
-        if isinstance(all_users, list):
-            # Если список и одна запись - возвращаем как объект
-            if len(all_users) == 1:
-                return user_schema.dump(all_users[0]), 200
-            else:
-                return users_schema.dump(all_users), 200
-        else:
-            # Если пришёл один объект
-            return user_schema.dump(all_users), 200
+        all_users = user_service.get_all()
+        return users_schema.dump(all_users), 200
     
     def post(self):
         """Make new record - user"""

@@ -11,7 +11,7 @@ class AuthService:
         self.user_service = user_secvice
 
     def generate_tokens(self, username, password, is_refresh=False):
-        user = self.user_service.get_all(username)
+        user = self.user_service.get_by_username(username)
 
         if user is None:
             raise abort(404)

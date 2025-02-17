@@ -6,13 +6,14 @@ import inspect
 import main
 import solution
 
-project_name = Path(os.path.abspath(__file__)).parent.parent.parent.name
-cwd = Path.cwd()
-parts = cwd.parts
-basefolder_index = parts.index(project_name)
-basepath = Path(*parts[:basefolder_index + 1])
-sys.path.append(str(basepath))
+# Определяем путь к корню проекта относительно местоположения этого скрипта
+project_root = Path(__file__).parent.parent.parent
+sys.path.append(str(project_root))
+
+# Импортируем тестовые миксины
 from ttools.skyprotests.tests import SkyproTestCase             # noqa: E402
+from ttools.skyprotests.tests_mixins import ResponseTestsMixin  # noqa: E402
+
 
 
 class PasswordTestCase(SkyproTestCase):

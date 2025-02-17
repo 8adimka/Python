@@ -12,11 +12,11 @@ class UserService:
     def get_one(self, user_id):
         return self.dao.get_one(user_id)
     
-    def get_all(self, username = None):
-        """Filtration logic"""
-        if username:
-            return self.dao.get_by_username(username)
+    def get_all(self):
         return self.dao.get_all()
+    
+    def get_by_username(self, username):
+        return self.dao.get_by_username(username)
 
     def create (self, data):
         data["password"] = self.generate_password(data["password"])
@@ -53,7 +53,7 @@ class UserService:
                                           PWD_ITERATIONS)
         return base64.b64encode(hash_digest)
     
-    def compare_password(self, password_hash, other_password) -> bool:
+    def compare_passwords(self, password_hash, other_password) -> bool:
         decoded_digest = base64.b64decode(password_hash)
 
         hash_digest = hashlib.pbkdf2_hmac(
