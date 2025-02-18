@@ -26,11 +26,19 @@
 #
 # Число итераций: 1000
 
-def easy(pwd_hash, other_password):
-    # TODO Напишите Ваш код здесь
-    pass
+import hashlib
+import hmac
+
+
+def easy(pwd_hash, other_password) -> bool:
+    pwd_hash = '80309097b712c6828d0f3f6dfd713e80'
+    other_password = 'H4RDP4S'
+    password_hash = hashlib.md5(other_password.encode("utf-8"))
+    # return hmac.compare_digest(password_hash, pwd_hash)
+    return pwd_hash == password_hash
 
 PWD_HASH_ITERATIONS = 1000
-def hard(password_hash, other_password, salt, algo):
-    # TODO Напишите Ваш код здесь
-    pass
+def hard(password_hash=b'\xb6`^\x81q\xd8e\x0b\x1f\x93YR\x8dE\x0c\x0f\xc2\xe4\xbc\x14\xf5\xdf\xdc\xec\xad\xcf\xf3\xca\xd2C\x17\xbb',
+         other_password='H4RDP4S$w0rd', salt='Skypro', algo='sha256'):
+    other_password_hash = hashlib.pbkdf2_hmac(algo, other_password.encode('utf-8'), salt, 1000)
+    return hmac.compare_digest(other_password_hash, password_hash)

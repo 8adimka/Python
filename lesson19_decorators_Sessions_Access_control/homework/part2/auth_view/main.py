@@ -36,9 +36,13 @@
 # *пароль в обычном виде: eGGPtRKS5
 #
 #
-from flask import Flask
+import calendar
+import datetime
+import hashlib
+from flask import Flask, abort, request
 from flask_restx import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
+import jwt
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -61,22 +65,74 @@ class User(db.Model):
     password = db.Column(db.String)
     role = db.Column(db.String)
 
-db.create_all()
 
 u1 = User(id=1, username='SkyUser', password='e5a9a38d52002ca74792b474d152bede', role='admin')
 
-with db.session.begin():
+with app.app_context():
+    db.create_all()
     db.session.add(u1)
+    db.session.commit()
+
+def generate_tokens(user):
+    data = {
+        "username": user.username,
+        "role": user.role
+    }
+
+    min30 = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
+    data["exp"] = calendar.timegm(min30.timetuple())
+    access_token = jwt.encode(data, secret, algorithm=algo)
+
+    days130 = datetime.datetime.utcnow() + datetime.timedelta(days=130)
+    data["exp"] = calendar.timegm(days130.timetuple())
+    refresh_token = jwt.encode(data, secret, algorithm=algo)
+
+    return {"access_token": access_token, "refresh_token": refresh_token}
 
 @auth_ns.route('/')
 class AuthView(Resource):
     def post(self):
-        # TODO напишите Ваш код здесь
-        pass
+        data = request.json
+
+        username = data.get("username", None)
+        password = data.get("password", None)
+
+        if None in [username, password]:
+            return "", 400
+        
+        user = db.session.query(User).filter(User.username == username).first()
+        if not user:
+            return {"error": "Неверные учётные данные"}, 401
+        
+        password_hash = hashlib.md5(password.encode('utf-8')).hexdigest()
+
+        if password_hash != user.password:
+            return {"error": "Неверные учётные данные"}, 401
+
+        tokens = generate_tokens(user)
+        return tokens, 200
 
     def put(self):
-        # TODO напишите Ваш код здесь
-        pass
+        req_json = request.json
+        refresh_token = req_json.get("refresh_token")
+        if refresh_token is None:
+            return "", 400
+
+        try:
+            data = jwt.decode(jwt=refresh_token, key=secret, algorithms=[algo])
+        except jwt.ExpiredSignatureError:
+            abort(401)
+        except jwt.InvalidTokenError:
+            abort(401)
+
+        username = data.get("username")
+
+        user = db.session.query(User).filter(User.username == username).first()
+        if not user:
+            return {"error": "Пользователь не найден"}, 401
+        
+        tokens = generate_tokens(user)
+        return tokens, 200
 
 if __name__ == '__main__':
     app.run(debug=False)
