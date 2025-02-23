@@ -98,7 +98,7 @@ class Point:
 def game_loop(stdscr):
     curses.curs_set(0)  # Скрываем курсор
     stdscr.nodelay(1)  # Неблокирующий ввод
-    stdscr.timeout(200)  # Таймаут для getch (в миллисекундах)
+    stdscr.timeout(300)  # Таймаут для getch (в миллисекундах)
 
     game_state = {'current_direction': None, 'game_on': True}
 
