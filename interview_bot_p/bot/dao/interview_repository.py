@@ -14,6 +14,14 @@ class InterviewRepository:
         self.db.refresh(question)
         return question
     
+    def get_user_answers(self, user_name: str):
+        """
+        Возвращает все ответы пользователя.
+        :param user_name: Имя пользователя.
+        :return: Список ответов пользователя.
+        """
+        return self.db.query(Answer).filter(Answer.user_name == user_name).all()
+
     def get_user_questions_count(self, user_name: str) -> int:
         return (
             self.db.query(Question)

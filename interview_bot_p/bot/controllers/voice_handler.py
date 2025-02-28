@@ -38,22 +38,58 @@ class VoiceHandler:
             return
 
         # Транскрибируем голосовое сообщение
-        answer = await self.transcribe_voice(update, context)
+        answer_text = await self.transcribe_voice(update, context)
 
         # Получаем последний вопрос пользователя
         last_question = self.interview_repo.get_last_question(user_name)
-        if last_question:
-            self.interview_repo.add_answer(user_name, last_question.id, answer)
-        else:
+        if not last_question:
             await update.message.reply_text("Ошибка: не найден предыдущий вопрос.")
+            return
+
+        # Сохраняем ответ пользователя
+        self.interview_repo.add_answer(user_name, last_question.id, answer_text)
+
+        # Получаем фидбэк на ответ
+        feedback_prompt = Prompt.get_prompt_by_name("ANSWER_FEEDBACK_PROMPT")
+        if not feedback_prompt:
+            await update.message.reply_text("Ошибка: шаблон фидбэка не найден.")
+            return
+
+        # Формируем текст для фидбэка
+        feedback_text = feedback_prompt.text.format(
+            question_text=last_question.text,
+            answer_text=answer_text
+        )
+
+        # Получаем фидбэк от OpenAI
+        feedback = self.openai_client.prompt_model(Prompt(text=feedback_text))
+        await update.message.reply_text(feedback)
 
         # Проверяем, нужно ли задать следующий вопрос или завершить интервью
         if self.interview_repo.get_user_questions_count(user_name) >= self.max_questions:
-            feedback = self.provide_feedback(user_name)
-        else:
-            feedback = self.ask_next_question(user_name)
+            # Даем общий фидбэк
+            final_feedback_prompt = Prompt.get_prompt_by_name("FEEDBACK_PROMPT")
+            if not final_feedback_prompt:
+                await update.message.reply_text("Ошибка: шаблон общего фидбэка не найден.")
+                return
 
-        await update.message.reply_text(feedback)
+            # Получаем все ответы пользователя
+            answers = self.interview_repo.get_user_answers(user_name)
+            answers_text = "\n".join([f"Вопрос: {a.question.text}\nОтвет: {a.text}" for a in answers])
+
+            # Формируем текст для общего фидбэка
+            final_feedback_text = final_feedback_prompt.text.format(answers_text=answers_text)
+
+            # Получаем общий фидбэк от OpenAI
+            final_feedback = self.openai_client.prompt_model(Prompt(text=final_feedback_text))
+            await update.message.reply_text(final_feedback)
+
+            # Завершаем интервью
+            self.interview_repo.finish_interview(user_name)
+        else:
+            # Задаем следующий вопрос
+            next_question = self.ask_next_question(user_name)
+            await update.message.reply_text(next_question)
 
     async def transcribe_voice(self, update: Update, context: CallbackContext) -> str:
         voice = update.message.voice
