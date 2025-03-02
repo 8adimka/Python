@@ -13,6 +13,8 @@ async def start_handler(update: Update, context):
     max_questions = Config.MAX_QUESTIONS
 
     try:
+        interview_repo.clear_user_data(user_name)
+
         interview_prompt = Prompt.get_prompt_by_name("INTERVIEW_PROMPT")
         # Форматируем текст промпта с количеством вопросов
         welcome_message = openai_client.prompt_model(Prompt(text=interview_prompt.text.format(max_questions=max_questions)))

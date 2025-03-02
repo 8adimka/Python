@@ -71,4 +71,12 @@ class InterviewRepository:
             interview.is_finished = True
             interview.finished_at = datetime.now()
         self.db.commit()
+
+    def clear_user_data(self, user_name: str):
+        """
+        Удаляет все вопросы и ответы пользователя перед началом нового интервью.
+        """
+        self.db.query(Answer).filter(Answer.user_name == user_name).delete()
+        self.db.query(Question).filter(Question.user_name == user_name).delete()
+        self.db.commit()
         

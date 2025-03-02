@@ -71,4 +71,3 @@ if __name__ == "__main__":
         raise ValueError("Переменная окружения TELEGRAM_BOT_TOKEN не установлена.")
     setup_telegram_bot()
 
-
