@@ -2,6 +2,8 @@ from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from bot.database import SessionLocal
 from bot.models.base import Base
+from sqlalchemy import Column, Integer, String, DateTime, Boolean
+from bot.database import Base
 
 
 class Question(Base):
@@ -53,3 +55,11 @@ class Prompt(Base):
 
     def __repr__(self):
         return f"<Prompt(name={self.name})>"
+    
+
+class Interview(Base):
+    __tablename__ = "interviews"
+    id = Column(Integer, primary_key=True, index=True)
+    user_name = Column(String, index=True)
+    is_finished = Column(Boolean, default=False)
+    finished_at = Column(DateTime, nullable=True)

@@ -68,38 +68,8 @@ class Command(BaseCommand):
         {"category": "Storage & Databases - Python ORM", "text": "Как использовать ORM с существующей базой данных?", "user_name": "default_user"},
         {"category": "Storage & Databases - Python ORM", "text": "Каковы соображения производительности при использовании ORM?", "user_name": "default_user"},
         {"category": "Storage & Databases - Python ORM", "text": "Каковы типичные варианты использования ORM? Почему?", "user_name": "default_user"},
-        {"category": "Storage & Databases - Python ORM", "text": "Когда лучше не использовать ORM? Почему?", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Поддерживаемые платформы.", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Внедрение зависимостей (регистрация сервисов, время жизни сервисов, проверка области видимости).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Конфигурация (типы провайдеров, иерархия, опции).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Middleware (что это такое, встроенные middleware и т.д.).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Маршрутизация (на основе соглашений, атрибутов, смешанная, области).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Обработка исключений и диагностика (health checks, фильтры исключений, логирование).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Сериализация (Newtonsoft.Json, System.Text.Json).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Модели хостинга (Kestrel, http.sys, IIS, Nginx, in-proc vs out-proc).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Конвейер запросов (в зависимости от модели хостинга).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Фильтры (типы, порядок).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Привязка модели и валидация.", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Безопасность (аутентификация и авторизация, распространенные уязвимости, управление секретами).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Фоновые задачи с использованием hosted services.", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Интеграционные тесты (настройка WebApplicationFactory, WithWebHostBuilder, mock authentication).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Blazor (модели хостинга - WebAssembly, Client/Server-Side, привязка данных, жизненный цикл, обработка событий, управление состоянием).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Web", "text": "Глобализация и локализация.", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Опишите основные аспекты наблюдаемости (логирование, трассировка, мониторинг).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Сравнение обычного текстового и JSON-логирования.", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Зачем нужен мониторинг? Что мониторить?", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Что такое метрики в контексте мониторинга? Типы метрик (счетчик, датчик и т.д.).", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Зачем нужна трассировка? Как она помогает в устранении неполадок?", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Что такое health checks и как их реализовать?", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Что такое протоколы OpenTracing/OpenTelemetry?", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Опишите подходы к логированию в распределенных системах.", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Опишите подходы к доставке логов в распределенных системах.", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Опишите подходы к мониторингу в распределенных системах.", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Как пользовательские метрики могут помочь? Как их реализовать?", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Какая техника позволяет связать сообщение трассировки с сообщениями логов?", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Опишите централизованные решения для логирования? Например, ELK, DataDog и т.д.", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Опишите решения для мониторинга? Например, Prometheus, DataDog и т.д.", "user_name": "default_user"},
-        {"category": "Frameworks (ASP.NET Core) - Monitoring, troubleshooting and maintenance", "text": "Опишите решения для трассировки? Например, Zipkin, Jaeger и т.д.", "user_name": "default_user"}]
+        {"category": "Storage & Databases - Python ORM", "text": "Когда лучше не использовать ORM? Почему?", "user_name": "default_user"}
+        ]
 
             for q_data in questions:
                 # Проверяем, существует ли вопрос с таким текстом
@@ -123,14 +93,18 @@ class Command(BaseCommand):
                 {
                     "name": "FEEDBACK_PROMPT",
                     "text": """
+                        Представь, что мы продолжаем разговор, поэтому не надо здороваться.
                         Проанализируй вопросы на собеседовании для позиции Junior Python Developer и те ответы, которые на каждый
-                        из них дал кандидат. Давай обратную связь по его ответам. Оцени собеседование в общем, скажи получается ли он работу или ему надо подготовиться ещё.
+                        из них дал кандидат. 
+                        Давай обратную связь по его ответам -> {answers_text}.
+                        Оцени собеседование в общем, скажи получает ли он эту воображаемую работу или ему нужно улучшить свои навыки и подготовиться ещё.
                     """
                 },
                 {
                     "name": "INTERVIEW_PROMPT",
                     "text": """
-                        Весело и тепло поприветствуй кандидата на собеседовании, а также расскажи ему о правилах интервью.
+                        Весело и тепло поприветствуй кандидата на собеседовании для позиции Junior Python Developer, а также расскажи ему о правилах интервью.
+                        Скажи, что интервью будет состоять из {max_questions} вопросов.
                         Тебе не нужно здесь ничего спрашивать у кандидата, мы просто здороваемся и знакомимся.
                         Стиль общения: Общайся с кандидатом на "ты". Это должна быть беседа двух хороших друзей.
                     """

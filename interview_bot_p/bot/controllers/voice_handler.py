@@ -37,8 +37,12 @@ class VoiceHandler:
             await update.message.reply_text(f"Ошибка при скачивании файла: {e}")
             return
 
-        # Транскрибируем голосовое сообщение
-        answer_text = await self.transcribe_voice(update, context)
+        try:
+            # Транскрибируем голосовое сообщение
+            answer_text = await self.transcribe_voice(update, context)
+        except Exception as e:
+            await update.message.reply_text(f"Ошибка при транскрибации: {e}")
+            return
 
         # Получаем последний вопрос пользователя
         last_question = self.interview_repo.get_last_question(user_name)
@@ -47,7 +51,11 @@ class VoiceHandler:
             return
 
         # Сохраняем ответ пользователя
-        self.interview_repo.add_answer(user_name, last_question.id, answer_text)
+        try:
+            self.interview_repo.add_answer(user_name, last_question.id, answer_text)
+        except ValueError as e:
+            await update.message.reply_text(f"Ошибка: {e}")
+            return
 
         # Получаем фидбэк на ответ
         feedback_prompt = Prompt.get_prompt_by_name("ANSWER_FEEDBACK_PROMPT")
@@ -61,9 +69,13 @@ class VoiceHandler:
             answer_text=answer_text
         )
 
-        # Получаем фидбэк от OpenAI
-        feedback = self.openai_client.prompt_model(Prompt(text=feedback_text))
-        await update.message.reply_text(feedback)
+        try:
+            # Получаем фидбэк от OpenAI
+            feedback = self.openai_client.prompt_model(Prompt(text=feedback_text))
+            await update.message.reply_text(feedback)
+        except Exception as e:
+            await update.message.reply_text(f"Ошибка при получении фидбэка: {e}")
+            return
 
         # Проверяем, нужно ли задать следующий вопрос или завершить интервью
         if self.interview_repo.get_user_questions_count(user_name) >= self.max_questions:
@@ -74,18 +86,31 @@ class VoiceHandler:
                 return
 
             # Получаем все ответы пользователя
-            answers = self.interview_repo.get_user_answers(user_name)
-            answers_text = "\n".join([f"Вопрос: {a.question.text}\nОтвет: {a.text}" for a in answers])
+            try:
+                answers = self.interview_repo.finish_interview(user_name)
+                if not answers:
+                    await update.message.reply_text("Ошибка: ответы пользователя не найдены.")
+                    return
+
+                answers_text = "\n".join([f"Вопрос: {a.question.text}\nОтвет: {a.text}" for a in answers])
+            except ValueError as e:
+                await update.message.reply_text(f"Ошибка: {e}")
+                return
 
             # Формируем текст для общего фидбэка
             final_feedback_text = final_feedback_prompt.text.format(answers_text=answers_text)
 
-            # Получаем общий фидбэк от OpenAI
-            final_feedback = self.openai_client.prompt_model(Prompt(text=final_feedback_text))
-            await update.message.reply_text(final_feedback)
+            try:
+                # Получаем общий фидбэк от OpenAI
+                final_feedback = self.openai_client.prompt_model(Prompt(text=final_feedback_text))
+                await update.message.reply_text(final_feedback)
+            except Exception as e:
+                await update.message.reply_text(f"Ошибка при получении общего фидбэка: {e}")
+                return
 
             # Завершаем интервью
-            self.interview_repo.finish_interview(user_name)
+            self.interview_repo.mark_interview_finished(user_name)
+            await update.message.reply_text("Интервью завершено. Спасибо за участие!")
         else:
             # Задаем следующий вопрос
             next_question = self.ask_next_question(user_name)
@@ -95,7 +120,12 @@ class VoiceHandler:
         voice = update.message.voice
         file_id = voice.file_id
         file_path = await self.download_voice(file_id, context)
-        return self.openai_client.transcribe(file_path)
+        transcription = self.openai_client.transcribe(file_path)
+        
+        if "Ошибка" in transcription:
+            raise Exception(transcription)
+        
+        return transcription
 
     async def download_voice(self, file_id: str, context: CallbackContext) -> str:
         file = await context.bot.get_file(file_id)  # Получаем объект File
@@ -126,21 +156,11 @@ class VoiceHandler:
         # Генерируем вопрос с помощью OpenAI
         generated_question = self.openai_client.prompt_model(Prompt(text=prompt_text))
         
-        if not generated_question:
+        if not generated_question or "Ошибка" in generated_question:
             return "Ошибка: не удалось сформулировать вопрос."
 
         # Сохраняем вопрос в базе данных
         self.interview_repo.add_question(user_name, generated_question)
 
         return generated_question
-
-    def provide_feedback(self, user_name: str) -> str:
-        prompt_obj = Prompt.get_prompt_by_name("FEEDBACK_PROMPT")
-        if not prompt_obj:
-            return "Ошибка: шаблон отзыва не найден."
-
-        self.interview_repo.finish_interview(user_name)
-
-        return prompt_obj.text
-    
     

@@ -19,3 +19,5 @@ class Config:
 
     # Database
     DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./interview_bot_p/interview_bot.db")
+
+    MAX_QUESTIONS = 4

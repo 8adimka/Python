@@ -8,6 +8,7 @@ from bot.config import Config
 
 def setup_telegram_bot():
     token = Config.TELEGRAM_BOT_TOKEN
+    max_questions = Config.MAX_QUESTIONS
     if not token:
         raise ValueError("Переменная окружения TELEGRAM_BOT_TOKEN не установлена.")
 
@@ -17,7 +18,7 @@ def setup_telegram_bot():
     openai_client = OpenAiClient()
     interview_repo = InterviewRepository()
     topic_repo = TopicRepository()
-    voice_handler = VoiceHandler(interview_repo, topic_repo, openai_client, max_questions=10)
+    voice_handler = VoiceHandler(interview_repo, topic_repo, openai_client, max_questions)
 
     # Регистрируем обработчики
     application.add_handler(CommandHandler("start", start_handler))
