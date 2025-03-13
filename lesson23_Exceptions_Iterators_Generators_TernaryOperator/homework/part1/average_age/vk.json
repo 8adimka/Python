@@ -1,0 +1,141 @@
+{
+    "response": {
+    "items": [
+    {
+      "first_name": "Sergey",
+      "id": 54234324,
+      "last_name": "Smirov",
+      "city": {
+        "id": 1,
+        "title": "Saint-Petersburg"
+      },
+      "bdate": null
+    }, {
+      "first_name": "Petr",
+      "id": 12412342,
+      "last_name": "Fedorov",
+      "city": null,
+      "bdate": "20.05"
+    },
+    {
+      "first_name": "Alexey",
+      "id": 12425230,
+      "last_name": "Sokolovskiy",
+      "city": {
+        "id": 2,
+        "title": "Moscow"
+      },
+      "bdate": "10.04.1990"
+    },
+    {
+    "first_name": "Gennadiy",
+    "id": 12425230,
+    "last_name": "Petrovskiy",
+    "city": {
+      "id": 1,
+      "title": "Saint-Petersburg"
+    },
+    "bdate": "13.09.1973"
+  },
+  {
+    "first_name": "Ivan",
+    "id": 12425230,
+    "last_name": "Ivanovich",
+    "city": {
+      "id": 2,
+      "title": "Moscow"
+    },
+    "bdate": "11.04.1992"
+  },
+  {
+    "first_name": "Sobolev",
+    "id": 12425230,
+    "last_name": "Stepan",
+    "city": {
+      "id": 2,
+      "title": "Moscow"
+    },
+    "bdate": "10.03.1986"
+  },
+  {
+    "first_name": "Maxim",
+    "id": 12425230,
+    "last_name": "Sorokin",
+    "city": {
+      "id": 1,
+      "title": "Saint-Petersburg"
+    },
+    "bdate": "05.01.1991"
+  },
+  {
+    "first_name": "Petr",
+    "id": 12425230,
+    "last_name": "Rakov",
+    "city": {
+      "id": 1,
+      "title": "Saint-Petersburg"
+    },
+    "bdate": "03.05.1994"
+  },    {
+    "first_name": "Mariya",
+    "id": 12425230,
+    "last_name": "Solnishkina",
+    "city": {
+      "id": 1,
+      "title": "Saint-Petersburg"
+    },
+    "bdate": "21.06.1995"
+  },
+  {
+    "first_name": "Dasha",
+    "id": 12425230,
+    "last_name": "Salova",
+    "city": {
+      "id": 2,
+      "title": "Moscow"
+    },
+    "bdate": "09.12.1981"
+  },
+  {
+    "first_name": "Rita",
+    "id": 12425230,
+    "last_name": "Morskaya",
+    "city": {
+      "id": 3,
+      "title": "Vladivostok"
+    },
+    "bdate": null
+  },
+  {
+    "first_name": "Katya",
+    "id": 12425230,
+    "last_name": "Michurina",
+    "city": {
+      "id": 3,
+      "title": "Vladivostok"
+    },
+    "bdate": "31.01.1993"
+  },
+  {
+    "first_name": "Michail",
+    "id": 12425230,
+    "last_name": "Goryachiy",
+    "city": {
+      "id": 3,
+      "title": "Vladivostok"
+    },
+    "bdate": "10.10.1990"
+    },
+    {
+      "first_name": "Michail",
+      "id": 12425230,
+      "last_name": "Goryachiy",
+      "city": {
+        "id": 3,
+        "title": "Vologda"
+      },
+      "bdate": null
+      }
+    ]
+    }
+}

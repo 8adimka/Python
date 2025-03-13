@@ -18,6 +18,6 @@ class Config:
     OPENAI_SYSTEM_ROLE = os.getenv("OPENAI_SYSTEM_ROLE", "You are a helpful assistant.")
 
     # Database
-    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./interview_bot_p/interview_bot.db")
-
+    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./interview_bot.db")
+    
     MAX_QUESTIONS = 4

@@ -27,3 +27,4 @@ def setup_telegram_bot():
     # Запускаем бота
     print("Бот запущен...")
     application.run_polling()
+
