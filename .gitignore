@@ -1,4 +1,6 @@
 venv
 .vscode
 /home/v/Python/c3l4_DAO/labor_1/.env
+/home/v/Python/interview_bot_p/.env
+/home/v/Python/interview_bot_p/op_ai_testing.py
 
