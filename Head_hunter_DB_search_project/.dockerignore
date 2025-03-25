@@ -1,0 +1,4 @@
+.env
+volumes/HH_vacancies.db
+/pgdata/
+/app_data/
