@@ -1,0 +1,17 @@
+[project]
+name = "lesson27_Django"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "8adimka",email = "m8adimka@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "django (>=5.2,<6.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
