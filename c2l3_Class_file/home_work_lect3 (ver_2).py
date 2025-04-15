@@ -68,3 +68,4 @@ def main():
     print(f'Вот и все!\nОтвечено {right_answers} вопроса из {len(class_list)}\nНабрано {score} баллов')
 
 main()
+
