@@ -1,23 +1,24 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM Получаем имя текущего пользователя
-set "USERNAME=%USERNAME%"
 set "TARGET_DIR=%APPDATA%\SystemLogs"
+set "EXE_PATH=%TARGET_DIR%\winupdater.exe"
+set "PROC_NAME=winupdater.exe"
 
-REM Удаляем ключ автозагрузки
-echo [+] Удаление ключа из реестра...
-reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "SystemLogs" /f
+echo [+] Завершение процесса %PROC_NAME%...
+taskkill /F /IM %PROC_NAME% >nul 2>&1
 
-REM Удаляем файлы из папки SystemLogs
-echo [+] Удаление файлов из директории: %TARGET_DIR%
-del /F /Q "%TARGET_DIR%\winupdater.exe"
-del /F /Q "%TARGET_DIR%\config.py"
-del /F /Q "%TARGET_DIR%\log.txt"
+echo [+] Удаление из автозагрузки...
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "SystemLogs" /f >nul 2>&1
 
-REM Удаляем папку (если она пуста)
-echo [+] Удаление пустой директории: %TARGET_DIR%
-rmdir "%TARGET_DIR%"
+echo [+] Удаление файлов...
+del /F /Q "%EXE_PATH%" >nul 2>&1
+del /F /Q "%TARGET_DIR%\app.log" >nul 2>&1
+del /F /Q "%TARGET_DIR%\keys.log" >nul 2>&1
+
+echo [+] Удаление директории...
+rmdir "%TARGET_DIR%" >nul 2>&1
 
 echo [✓] Удаление завершено.
 pause
+exit /b

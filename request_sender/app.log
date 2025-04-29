@@ -1,0 +1,23 @@
+2025-04-29 19:22:49,593 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 19:22:50,702 - INFO - Программа запущена. Нажмите Ctrl+C для остановки.
+2025-04-29 19:22:50,702 - INFO - Начинаем новую проверку...
+2025-04-29 19:22:55,664 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
+2025-04-29 19:22:55,717 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192255.png
+2025-04-29 19:22:55,721 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192255.html
+2025-04-29 19:22:59,175 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 19:23:10,094 - INFO - Начинаем новую проверку...
+2025-04-29 19:23:12,680 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
+2025-04-29 19:23:12,738 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192312.png
+2025-04-29 19:23:12,742 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192312.html
+2025-04-29 19:23:16,400 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 19:24:10,986 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 19:24:11,972 - INFO - Программа запущена. Нажмите Ctrl+C для остановки.
+2025-04-29 19:24:11,972 - INFO - Начинаем новую проверку...
+2025-04-29 19:24:17,354 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
+2025-04-29 19:24:17,415 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192417.png
+2025-04-29 19:24:17,418 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192417.html
+2025-04-29 19:24:20,999 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 19:24:32,039 - INFO - Начинаем новую проверку...
+2025-04-29 19:24:35,323 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
+2025-04-29 19:24:35,382 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192435.png
+2025-04-29 19:24:35,386 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192435.html
