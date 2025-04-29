@@ -1,276 +1,96 @@
-2025-04-29 19:22:49,593 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:22:50,702 - INFO - Программа запущена. Нажмите Ctrl+C для остановки.
-2025-04-29 19:22:50,702 - INFO - Начинаем новую проверку...
-2025-04-29 19:22:55,664 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
-2025-04-29 19:22:55,717 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192255.png
-2025-04-29 19:22:55,721 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192255.html
-2025-04-29 19:22:59,175 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:23:10,094 - INFO - Начинаем новую проверку...
-2025-04-29 19:23:12,680 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
-2025-04-29 19:23:12,738 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192312.png
-2025-04-29 19:23:12,742 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192312.html
-2025-04-29 19:23:16,400 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:24:10,986 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:24:11,972 - INFO - Программа запущена. Нажмите Ctrl+C для остановки.
-2025-04-29 19:24:11,972 - INFO - Начинаем новую проверку...
-2025-04-29 19:24:17,354 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
-2025-04-29 19:24:17,415 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192417.png
-2025-04-29 19:24:17,418 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192417.html
-2025-04-29 19:24:20,999 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:24:32,039 - INFO - Начинаем новую проверку...
-2025-04-29 19:24:35,323 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
-2025-04-29 19:24:35,382 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192435.png
-2025-04-29 19:24:35,386 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192435.html
-2025-04-29 19:26:36,065 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:26:37,072 - INFO - Программа запущена. Нажмите Ctrl+C для остановки.
-2025-04-29 19:26:37,072 - INFO - Начинаем новую проверку...
-2025-04-29 19:26:40,179 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
-2025-04-29 19:26:40,235 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192640.png
-2025-04-29 19:26:40,239 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192640.html
-2025-04-29 19:26:43,692 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:26:54,744 - INFO - Начинаем новую проверку...
-2025-04-29 19:27:08,907 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
-2025-04-29 19:27:08,972 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192708.png
-2025-04-29 19:27:08,976 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192708.html
-2025-04-29 19:27:12,481 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:27:23,457 - INFO - Начинаем новую проверку...
-2025-04-29 19:27:25,427 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
-2025-04-29 19:27:25,494 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192725.png
-2025-04-29 19:27:25,497 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192725.html
-2025-04-29 19:27:28,962 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:27:40,214 - INFO - Начинаем новую проверку...
-2025-04-29 19:27:42,006 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
-2025-04-29 19:27:42,092 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192742.png
-2025-04-29 19:27:42,102 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192742.html
-2025-04-29 19:27:45,608 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:27:56,935 - INFO - Начинаем новую проверку...
-2025-04-29 19:27:59,445 - INFO - Сохранен скриншот ошибки: errors/province_selection_error_20250429_192759.png
-2025-04-29 19:27:59,449 - INFO - Сохранен HTML ошибки: errors/province_selection_error_20250429_192759.html
-2025-04-29 19:27:59,449 - ERROR - Ошибка в основном цикле: Ошибка выбора провинции
-2025-04-29 19:27:59,521 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192759.png
-2025-04-29 19:27:59,529 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192759.html
-2025-04-29 19:49:36,059 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:49:51,302 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:56:23,984 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:56:25,036 - INFO - Попытка 1/5. Программа запущена.
-2025-04-29 19:56:25,098 - ERROR - Ошибка загрузки начальной страницы: Message: <unknown>: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+2025-04-29 20:36:48,894 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 20:41:28,482 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 20:43:33,469 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 20:46:25,750 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 20:53:07,394 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 20:53:08,361 - INFO - Попытка 1/5. Программа запущена.
+2025-04-29 20:53:11,762 - ERROR - Обнаружена блокировка. Код ошибки: Cod. Oper.: A7AA6A42E3B9BDC9BFD27C43B61A176Dmol1 29/04/2025 20:53:11
+2025-04-29 20:53:13,354 - INFO - Успешно обработали страницу с ошибкой
+2025-04-29 20:53:13,354 - INFO - Выполняется шаг: Выбор провинции
+2025-04-29 20:53:20,035 - INFO - Выполняется шаг: Выбор trámite
+2025-04-29 20:53:23,137 - ERROR - Ошибка выбора trámite: Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
   (Session info: chrome=135.0.7049.84)
 Stacktrace:
-#0 0x5e17b5a5a75a <unknown>
-#1 0x5e17b550d4b0 <unknown>
-#2 0x5e17b55140b6 <unknown>
-#3 0x5e17b5516c07 <unknown>
-#4 0x5e17b55ab61e <unknown>
-#5 0x5e17b5584592 <unknown>
-#6 0x5e17b55aa5e0 <unknown>
-#7 0x5e17b5584363 <unknown>
-#8 0x5e17b5550d63 <unknown>
-#9 0x5e17b55519c1 <unknown>
-#10 0x5e17b5a1fa6b <unknown>
-#11 0x5e17b5a23951 <unknown>
-#12 0x5e17b5a07b62 <unknown>
-#13 0x5e17b5a244c4 <unknown>
-#14 0x5e17b59ec13f <unknown>
-#15 0x5e17b5a486f8 <unknown>
-#16 0x5e17b5a488d6 <unknown>
-#17 0x5e17b5a595a6 <unknown>
-#18 0x750eb667470a <unknown>
-#19 0x750eb66f8aac <unknown>
+#0 0x63a951c9275a <unknown>
+#1 0x63a9517454b0 <unknown>
+#2 0x63a95172b38e <unknown>
+#3 0x63a951753fa9 <unknown>
+#4 0x63a9517c4eb9 <unknown>
+#5 0x63a9517e1f7c <unknown>
+#6 0x63a9517bc363 <unknown>
+#7 0x63a951788d63 <unknown>
+#8 0x63a9517899c1 <unknown>
+#9 0x63a951c57a6b <unknown>
+#10 0x63a951c5b951 <unknown>
+#11 0x63a951c3fb62 <unknown>
+#12 0x63a951c5c4c4 <unknown>
+#13 0x63a951c2413f <unknown>
+#14 0x63a951c806f8 <unknown>
+#15 0x63a951c808d6 <unknown>
+#16 0x63a951c915a6 <unknown>
+#17 0x780efcc5170a <unknown>
+#18 0x780efccd5aac <unknown>
 
-2025-04-29 19:56:26,731 - INFO - Сохранен скриншот ошибки: errors/initial_page_load_error_20250429_195625.png
-2025-04-29 19:56:26,733 - INFO - Сохранен HTML ошибки: errors/initial_page_load_error_20250429_195625.html
-2025-04-29 19:56:26,733 - WARNING - Не удалось загрузить начальную страницу. Попытка 1/5
-2025-04-29 19:56:31,085 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:56:42,878 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:58:00,208 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:58:01,240 - INFO - Попытка 1/5. Программа запущена.
-2025-04-29 19:58:01,309 - ERROR - Ошибка загрузки начальной страницы: Message: <unknown>: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
-  (Session info: chrome=135.0.7049.84)
+2025-04-29 20:53:23,143 - ERROR - Критическая ошибка: Message: invalid session id
 Stacktrace:
-#0 0x62e0a8a6a75a <unknown>
-#1 0x62e0a851d4b0 <unknown>
-#2 0x62e0a85240b6 <unknown>
-#3 0x62e0a8526c07 <unknown>
-#4 0x62e0a85bb61e <unknown>
-#5 0x62e0a8594592 <unknown>
-#6 0x62e0a85ba5e0 <unknown>
-#7 0x62e0a8594363 <unknown>
-#8 0x62e0a8560d63 <unknown>
-#9 0x62e0a85619c1 <unknown>
-#10 0x62e0a8a2fa6b <unknown>
-#11 0x62e0a8a33951 <unknown>
-#12 0x62e0a8a17b62 <unknown>
-#13 0x62e0a8a344c4 <unknown>
-#14 0x62e0a89fc13f <unknown>
-#15 0x62e0a8a586f8 <unknown>
-#16 0x62e0a8a588d6 <unknown>
-#17 0x62e0a8a695a6 <unknown>
-#18 0x7c6d06db170a <unknown>
-#19 0x7c6d06e35aac <unknown>
+#0 0x63a951c9275a <unknown>
+#1 0x63a951745303 <unknown>
+#2 0x63a951787f0f <unknown>
+#3 0x63a9517bc496 <unknown>
+#4 0x63a9517b6dd7 <unknown>
+#5 0x63a9517b5f15 <unknown>
+#6 0x63a95170e6f8 <unknown>
+#7 0x63a951c57a6b <unknown>
+#8 0x63a951c5b951 <unknown>
+#9 0x63a951c3fb62 <unknown>
+#10 0x63a951c5c4c4 <unknown>
+#11 0x63a951c2413f <unknown>
+#12 0x63a95170c481 <unknown>
+#13 0x780efcbe3488 <unknown>
+#14 0x780efcbe354c __libc_start_main
+#15 0x63a9516d4a2a _start
 
-2025-04-29 19:58:02,890 - INFO - Сохранен скриншот ошибки: errors/initial_page_load_error_20250429_195801.png
-2025-04-29 19:58:02,893 - INFO - Сохранен HTML ошибки: errors/initial_page_load_error_20250429_195801.html
-2025-04-29 19:58:02,893 - WARNING - Не удалось загрузить начальную страницу. Попытка 1/5
-2025-04-29 19:58:09,672 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:58:24,524 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:59:27,507 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 19:59:28,660 - INFO - Попытка 1/5. Программа запущена.
-2025-04-29 19:59:28,728 - ERROR - Ошибка загрузки начальной страницы: Message: <unknown>: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
-  (Session info: chrome=135.0.7049.84)
+2025-04-29 20:53:34,908 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 20:53:36,059 - INFO - Попытка 1/5. Программа запущена.
+2025-04-29 20:53:39,758 - ERROR - Обнаружена блокировка. Код ошибки: Cod. Oper.: 42FB6369EC902DB3B53D8FC264E156B0mol3 29/04/2025 20:53:38
+2025-04-29 20:53:43,983 - INFO - Успешно обработали страницу с ошибкой
+2025-04-29 20:53:43,983 - INFO - Выполняется шаг: Выбор провинции
+2025-04-29 20:53:52,153 - INFO - Выполняется шаг: Выбор trámite
+2025-04-29 20:54:08,240 - ERROR - Ошибка выбора trámite: Message: 
 Stacktrace:
-#0 0x6407d930975a <unknown>
-#1 0x6407d8dbc4b0 <unknown>
-#2 0x6407d8dc30b6 <unknown>
-#3 0x6407d8dc5c07 <unknown>
-#4 0x6407d8e5a61e <unknown>
-#5 0x6407d8e33592 <unknown>
-#6 0x6407d8e595e0 <unknown>
-#7 0x6407d8e33363 <unknown>
-#8 0x6407d8dffd63 <unknown>
-#9 0x6407d8e009c1 <unknown>
-#10 0x6407d92cea6b <unknown>
-#11 0x6407d92d2951 <unknown>
-#12 0x6407d92b6b62 <unknown>
-#13 0x6407d92d34c4 <unknown>
-#14 0x6407d929b13f <unknown>
-#15 0x6407d92f76f8 <unknown>
-#16 0x6407d92f78d6 <unknown>
-#17 0x6407d93085a6 <unknown>
-#18 0x75e62baac70a <unknown>
-#19 0x75e62bb30aac <unknown>
+#0 0x5ce92f5a675a <unknown>
+#1 0x5ce92f0594b0 <unknown>
+#2 0x5ce92f0aa9b3 <unknown>
+#3 0x5ce92f0aaba1 <unknown>
+#4 0x5ce92f0f91f4 <unknown>
+#5 0x5ce92f0d05bd <unknown>
+#6 0x5ce92f0f65e0 <unknown>
+#7 0x5ce92f0d0363 <unknown>
+#8 0x5ce92f09cd63 <unknown>
+#9 0x5ce92f09d9c1 <unknown>
+#10 0x5ce92f56ba6b <unknown>
+#11 0x5ce92f56f951 <unknown>
+#12 0x5ce92f553b62 <unknown>
+#13 0x5ce92f5704c4 <unknown>
+#14 0x5ce92f53813f <unknown>
+#15 0x5ce92f5946f8 <unknown>
+#16 0x5ce92f5948d6 <unknown>
+#17 0x5ce92f5a55a6 <unknown>
+#18 0x714db7b7770a <unknown>
+#19 0x714db7bfbaac <unknown>
 
-2025-04-29 19:59:30,317 - INFO - Сохранен скриншот ошибки: errors/initial_page_load_error_20250429_195928.png
-2025-04-29 19:59:30,320 - INFO - Сохранен HTML ошибки: errors/initial_page_load_error_20250429_195928.html
-2025-04-29 19:59:30,320 - WARNING - Не удалось загрузить начальную страницу. Попытка 1/5
-2025-04-29 19:59:34,484 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:12:16,891 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:12:18,313 - INFO - Попытка 1/5. Программа запущена.
-2025-04-29 20:12:22,708 - ERROR - Обнаружена блокировка. Код ошибки: Cod. Oper.: 1F8594B7D2D5EC7474996AD8E0682FA7mol3 29/04/2025 20:12:20
-2025-04-29 20:12:25,866 - INFO - Успешно обработали страницу с ошибкой
-2025-04-29 20:12:25,866 - INFO - Выполняется шаг: Выбор провинции
-2025-04-29 20:12:32,974 - INFO - Выполняется шаг: Выбор trámite
-2025-04-29 20:12:50,199 - ERROR - Ошибка выбора trámite: Message: 
-Stacktrace:
-#0 0x62ac5e96975a <unknown>
-#1 0x62ac5e41c4b0 <unknown>
-#2 0x62ac5e46d9b3 <unknown>
-#3 0x62ac5e46dba1 <unknown>
-#4 0x62ac5e4bc1f4 <unknown>
-#5 0x62ac5e4935bd <unknown>
-#6 0x62ac5e4b95e0 <unknown>
-#7 0x62ac5e493363 <unknown>
-#8 0x62ac5e45fd63 <unknown>
-#9 0x62ac5e4609c1 <unknown>
-#10 0x62ac5e92ea6b <unknown>
-#11 0x62ac5e932951 <unknown>
-#12 0x62ac5e916b62 <unknown>
-#13 0x62ac5e9334c4 <unknown>
-#14 0x62ac5e8fb13f <unknown>
-#15 0x62ac5e9576f8 <unknown>
-#16 0x62ac5e9578d6 <unknown>
-#17 0x62ac5e9685a6 <unknown>
-#18 0x73782fa5770a <unknown>
-#19 0x73782fadbaac <unknown>
-
-2025-04-29 20:12:50,312 - INFO - Сохранен скриншот ошибки: errors/tramite_selection_error_20250429_201250.png
-2025-04-29 20:12:50,509 - INFO - Сохранен HTML ошибки: errors/tramite_selection_error_20250429_201250.html
-2025-04-29 20:12:50,599 - INFO - Сохранен скриншот ошибки: errors/tramite_selection_error_20250429_201250.png
-2025-04-29 20:12:50,602 - INFO - Сохранен HTML ошибки: errors/tramite_selection_error_20250429_201250.html
-2025-04-29 20:12:50,602 - WARNING - Ошибка на шаге 'Выбор trámite'. Попытка 1/5
-2025-04-29 20:12:54,991 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:14:05,749 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:14:07,917 - INFO - Попытка 1/5. Программа запущена.
-2025-04-29 20:14:10,873 - ERROR - Обнаружена блокировка. Код ошибки: Cod. Oper.: 0F50D4F4B69E5777938FA3C2DC00925Dmol3 29/04/2025 20:14:09
-2025-04-29 20:14:12,561 - INFO - Успешно обработали страницу с ошибкой
-2025-04-29 20:14:12,561 - INFO - Выполняется шаг: Выбор провинции
-2025-04-29 20:14:19,574 - INFO - Выполняется шаг: Выбор trámite
-2025-04-29 20:14:26,363 - INFO - Выполняется шаг: Отправка информации
-2025-04-29 20:14:30,156 - INFO - Выполняется шаг: Заполнение данных
-2025-04-29 20:14:57,152 - ERROR - Ошибка заполнения данных: Message: 
-Stacktrace:
-#0 0x6155ef56d75a <unknown>
-#1 0x6155ef0204b0 <unknown>
-#2 0x6155ef0719b3 <unknown>
-#3 0x6155ef071ba1 <unknown>
-#4 0x6155ef0c01f4 <unknown>
-#5 0x6155ef0975bd <unknown>
-#6 0x6155ef0bd5e0 <unknown>
-#7 0x6155ef097363 <unknown>
-#8 0x6155ef063d63 <unknown>
-#9 0x6155ef0649c1 <unknown>
-#10 0x6155ef532a6b <unknown>
-#11 0x6155ef536951 <unknown>
-#12 0x6155ef51ab62 <unknown>
-#13 0x6155ef5374c4 <unknown>
-#14 0x6155ef4ff13f <unknown>
-#15 0x6155ef55b6f8 <unknown>
-#16 0x6155ef55b8d6 <unknown>
-#17 0x6155ef56c5a6 <unknown>
-#18 0x7b57984b070a <unknown>
-#19 0x7b5798534aac <unknown>
-
-2025-04-29 20:14:57,269 - INFO - Сохранен скриншот ошибки: errors/personal_data_fill_error_20250429_201457.png
-2025-04-29 20:14:57,278 - INFO - Сохранен HTML ошибки: errors/personal_data_fill_error_20250429_201457.html
-2025-04-29 20:14:57,379 - INFO - Сохранен скриншот ошибки: errors/personal_data_error_20250429_201457.png
-2025-04-29 20:14:57,384 - INFO - Сохранен HTML ошибки: errors/personal_data_error_20250429_201457.html
-2025-04-29 20:14:57,384 - WARNING - Ошибка на шаге 'Заполнение данных'. Попытка 1/5
-2025-04-29 20:15:03,216 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:15:28,734 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:16:19,755 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:16:25,045 - INFO - Попытка 1/5. Программа запущена.
-2025-04-29 20:16:27,375 - ERROR - Обнаружена блокировка. Код ошибки: Cod. Oper.: D4184E670B7D31F4EEE81F0F2C28AB48gal3 29/04/2025 20:16:26
-2025-04-29 20:16:31,793 - INFO - Успешно обработали страницу с ошибкой
-2025-04-29 20:16:31,793 - INFO - Выполняется шаг: Выбор провинции
-2025-04-29 20:16:36,940 - INFO - Выполняется шаг: Выбор trámite
-2025-04-29 20:16:44,390 - INFO - Выполняется шаг: Отправка информации
-2025-04-29 20:16:48,429 - INFO - Выполняется шаг: Заполнение данных
-2025-04-29 20:17:13,658 - ERROR - Ошибка заполнения данных: Message: 
-Stacktrace:
-#0 0x59bcc2b3775a <unknown>
-#1 0x59bcc25ea4b0 <unknown>
-#2 0x59bcc263b9b3 <unknown>
-#3 0x59bcc263bba1 <unknown>
-#4 0x59bcc268a1f4 <unknown>
-#5 0x59bcc26615bd <unknown>
-#6 0x59bcc26875e0 <unknown>
-#7 0x59bcc2661363 <unknown>
-#8 0x59bcc262dd63 <unknown>
-#9 0x59bcc262e9c1 <unknown>
-#10 0x59bcc2afca6b <unknown>
-#11 0x59bcc2b00951 <unknown>
-#12 0x59bcc2ae4b62 <unknown>
-#13 0x59bcc2b014c4 <unknown>
-#14 0x59bcc2ac913f <unknown>
-#15 0x59bcc2b256f8 <unknown>
-#16 0x59bcc2b258d6 <unknown>
-#17 0x59bcc2b365a6 <unknown>
-#18 0x7b20676ab70a <unknown>
-#19 0x7b206772faac <unknown>
-
-2025-04-29 20:17:13,776 - INFO - Сохранен скриншот ошибки: errors/personal_data_fill_error_20250429_201713.png
-2025-04-29 20:17:13,784 - INFO - Сохранен HTML ошибки: errors/personal_data_fill_error_20250429_201713.html
-2025-04-29 20:17:13,884 - INFO - Сохранен скриншот ошибки: errors/personal_data_error_20250429_201713.png
-2025-04-29 20:17:13,889 - INFO - Сохранен HTML ошибки: errors/personal_data_error_20250429_201713.html
-2025-04-29 20:17:13,889 - WARNING - Ошибка на шаге 'Заполнение данных'. Попытка 1/5
-2025-04-29 20:23:02,988 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:23:12,260 - INFO - Попытка 1/5. Программа запущена.
-2025-04-29 20:23:26,394 - ERROR - Обнаружена блокировка. Код ошибки: Cod. Oper.: D8A7CC189D7F9DE7598748B1E39393F7mol3 29/04/2025 20:23:13
-2025-04-29 20:23:30,328 - INFO - Успешно обработали страницу с ошибкой
-2025-04-29 20:23:30,328 - INFO - Выполняется шаг: Выбор провинции
-2025-04-29 20:23:35,677 - INFO - Выполняется шаг: Выбор trámite
-2025-04-29 20:23:41,460 - INFO - Выполняется шаг: Отправка информации
-2025-04-29 20:23:45,704 - INFO - Выполняется шаг: Заполнение данных
-2025-04-29 20:24:02,088 - INFO - Нет мест. Повторная проверка через 60.0 сек...
-2025-04-29 20:25:57,295 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:26:14,170 - INFO - Попытка 1/5. Программа запущена.
-2025-04-29 20:26:16,940 - ERROR - Обнаружена блокировка. Код ошибки: Cod. Oper.: B46769A30D08511E0AF7962D1531C888mol1 29/04/2025 20:26:15
-2025-04-29 20:26:20,923 - INFO - Успешно обработали страницу с ошибкой
-2025-04-29 20:26:20,923 - INFO - Выполняется шаг: Выбор провинции
-2025-04-29 20:26:25,097 - INFO - Выполняется шаг: Выбор trámite
-2025-04-29 20:26:31,651 - INFO - Выполняется шаг: Отправка информации
-2025-04-29 20:26:35,868 - INFO - Выполняется шаг: Заполнение данных
-2025-04-29 20:26:57,374 - INFO - Нет мест. Повторная проверка через 432000.0 сек...
-2025-04-29 20:28:08,755 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:29:23,500 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:30:07,433 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
-2025-04-29 20:32:44,456 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 20:54:08,339 - INFO - Сохранен скриншот ошибки: errors/tramite_selection_error_20250429_205408.png
+2025-04-29 20:54:08,343 - INFO - Сохранен HTML ошибки: errors/tramite_selection_error_20250429_205408.html
+2025-04-29 20:54:08,456 - INFO - Сохранен скриншот ошибки: errors/tramite_selection_error_20250429_205408.png
+2025-04-29 20:54:08,458 - INFO - Сохранен HTML ошибки: errors/tramite_selection_error_20250429_205408.html
+2025-04-29 20:54:08,459 - WARNING - Ошибка на шаге 'Выбор trámite'. Попытка 1/5
+2025-04-29 21:00:36,354 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 21:00:37,524 - INFO - Попытка 1/5. Программа запущена.
+2025-04-29 21:00:41,488 - ERROR - Обнаружена блокировка. Код ошибки: Cod. Oper.: 654AC53242B2D06371879690EF662B94gal3 29/04/2025 21:00:40
+2025-04-29 21:00:42,785 - INFO - Успешно обработали страницу с ошибкой
+2025-04-29 21:00:42,785 - INFO - Выполняется шаг: Выбор провинции
+2025-04-29 21:00:50,893 - INFO - Выполняется шаг: Выбор trámite
+2025-04-29 21:00:55,564 - INFO - Выполняется шаг: Отправка информации
+2025-04-29 21:01:00,858 - INFO - Выполняется шаг: Заполнение данных
+2025-04-29 21:01:15,650 - INFO - Нет мест. Повторная проверка через 60.0 сек...
