@@ -1,7 +1,8 @@
+import random
 from request_client import RequestClient
 import time
 import logging
-from settings import CHECK_INTERVAL_SECONDS, DEBUG_MODE, MAX_RETRIES  # Добавлен MAX_RETRIES
+from settings import CHECK_INTERVAL, DEBUG_MODE, MAX_RETRIES  # Добавлен MAX_RETRIES
 
 # Настройка логирования
 logging.basicConfig(
@@ -62,8 +63,8 @@ def main():
                         retries += 1
                         time.sleep(random.randint(30, 60))  # Увеличенная задержка при блокировке
                     else:
-                        logging.info(f"Нет мест. Повторная проверка через {CHECK_INTERVAL_SECONDS} сек...")
-                        time.sleep(CHECK_INTERVAL_SECONDS)
+                        logging.info(f"Нет мест. Повторная проверка через {CHECK_INTERVAL} сек...")
+                        time.sleep(CHECK_INTERVAL)
                         retries = 0  # Сброс счетчика при успешном цикле
                         
             except Exception as e:
