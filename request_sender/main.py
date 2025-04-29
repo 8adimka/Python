@@ -1,7 +1,7 @@
 from request_client import RequestClient
 import time
 import logging
-from settings import CHECK_INTERVAL_SECONDS, DEBUG_MODE
+from settings import CHECK_INTERVAL_SECONDS, DEBUG_MODE, MAX_RETRIES  # Добавлен MAX_RETRIES
 
 # Настройка логирования
 logging.basicConfig(
@@ -14,65 +14,72 @@ logging.basicConfig(
 )
 
 def main():
-    client = RequestClient()
-    try:
-        logging.info("Программа запущена. Нажмите Ctrl+C для остановки.")
-        while True:
+    retries = 0
+    while retries < MAX_RETRIES:
+        try:
+            client = RequestClient()
+            logging.info(f"Попытка {retries + 1}/{MAX_RETRIES}. Программа запущена.")
+            
             try:
-                logging.info("Начинаем новую проверку...")
-                
+                # Загрузка начальной страницы с повторными попытками
                 if not client.load_initial_page():
-                    raise Exception("Не удалось загрузить начальную страницу")
+                    retries += 1
+                    logging.warning(f"Не удалось загрузить начальную страницу. Попытка {retries}/{MAX_RETRIES}")
+                    client.restart_browser()
+                    time.sleep(random.randint(10, 30))  # Случайная задержка
+                    continue
                 
-                if not client.select_province("Alicante"):
-                    if DEBUG_MODE:
-                        client.save_error_screenshot("province_selection_error")
-                    raise Exception("Ошибка выбора провинции")
+                # Последовательность шагов
+                steps = [
+                    ("Выбор провинции", client.select_province, ["Alicante"], "province_selection_error"),
+                    ("Выбор trámite", client.select_tramite, ["POLICIA- EXPEDICIÓN/RENOVACIÓN DE DOCUMENTOS DE SOLICITANTES DE ASILO"], "tramite_selection_error"),
+                    ("Отправка информации", client.submit_info_page, [], "info_page_error"),
+                    ("Заполнение данных", client.fill_personal_data, [], "personal_data_error")
+                ]
                 
-                if not client.select_tramite("POLICIA- EXPEDICIÓN/RENOVACIÓN DE DOCUMENTOS DE SOLICITANTES DE ASILO"):
-                    if DEBUG_MODE:
-                        client.save_error_screenshot("tramite_selection_error")
-                    raise Exception("Ошибка выбора trámite")
-                
-                if not client.submit_info_page():
-                    if DEBUG_MODE:
-                        client.save_error_screenshot("info_page_error")
-                    raise Exception("Ошибка на странице информации")
-                
-                if not client.fill_personal_data():
-                    if DEBUG_MODE:
-                        client.save_error_screenshot("personal_data_error")
-                    raise Exception("Ошибка заполнения данных")
-                
-                result = client.check_slots()
-                
-                if result["status"] == "slots_available":
-                    logging.critical("НАЙДЕНЫ СВОБОДНЫЕ МЕСТА!")
-                    client.send_telegram_alert("СРОЧНО: Доступны citas!", result.get("html_path"))
-                    break
-                elif result["status"] == "blocked":
-                    logging.critical("ОБНАРУЖЕНА БЛОКИРОВКА! Программа остановлена.")
-                    if DEBUG_MODE:
-                        client.save_error_screenshot("blocked_page")
-                    break
-                
-                logging.info(f"Нет мест. Повторная проверка через {CHECK_INTERVAL_SECONDS} сек...")
-                time.sleep(CHECK_INTERVAL_SECONDS)
-                
+                for step_name, step_func, args, error_screenshot in steps:
+                    logging.info(f"Выполняется шаг: {step_name}")
+                    if not step_func(*args):
+                        retries += 1
+                        if DEBUG_MODE:
+                            client.save_error_screenshot(error_screenshot)
+                        logging.warning(f"Ошибка на шаге '{step_name}'. Попытка {retries}/{MAX_RETRIES}")
+                        client.restart_browser()
+                        time.sleep(random.randint(10, 30))
+                        break
+                else:
+                    # Все шаги выполнены успешно
+                    result = client.check_slots()
+                    
+                    if result["status"] == "slots_available":
+                        logging.critical("НАЙДЕНЫ СВОБОДНЫЕ МЕСТА!")
+                        client.send_telegram_alert("СРОЧНО: Доступны citas!", result.get("html_path"))
+                        return  # Успешное завершение
+                    elif result["status"] == "blocked":
+                        logging.critical("ОБНАРУЖЕНА БЛОКИРОВКА!")
+                        if DEBUG_MODE:
+                            client.save_error_screenshot("blocked_page")
+                        retries += 1
+                        time.sleep(random.randint(30, 60))  # Увеличенная задержка при блокировке
+                    else:
+                        logging.info(f"Нет мест. Повторная проверка через {CHECK_INTERVAL_SECONDS} сек...")
+                        time.sleep(CHECK_INTERVAL_SECONDS)
+                        retries = 0  # Сброс счетчика при успешном цикле
+                        
             except Exception as e:
-                logging.error(f"Ошибка в основном цикле: {str(e)}")
+                logging.error(f"Критическая ошибка: {str(e)}")
+                retries += 1
                 if DEBUG_MODE:
-                    client.save_error_screenshot("main_loop_error")
+                    client.save_error_screenshot(f"critical_error_{retries}")
                 client.restart_browser()
-                time.sleep(10)
+                time.sleep(random.randint(30, 60))
 
-    except KeyboardInterrupt:
-        logging.info("Прервано пользователем.")
-    finally:
-        if not DEBUG_MODE:
-            client.close()
-        else:
-            logging.info("Режим отладки: браузер остается открытым")
+        except KeyboardInterrupt:
+            logging.info("Прервано пользователем.")
+            return
+            
+    logging.error(f"Достигнуто максимальное количество попыток ({MAX_RETRIES}). Программа остановлена.")
 
 if __name__ == "__main__":
     main()
+    

@@ -21,3 +21,31 @@
 2025-04-29 19:24:35,323 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
 2025-04-29 19:24:35,382 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192435.png
 2025-04-29 19:24:35,386 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192435.html
+2025-04-29 19:26:36,065 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 19:26:37,072 - INFO - Программа запущена. Нажмите Ctrl+C для остановки.
+2025-04-29 19:26:37,072 - INFO - Начинаем новую проверку...
+2025-04-29 19:26:40,179 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
+2025-04-29 19:26:40,235 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192640.png
+2025-04-29 19:26:40,239 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192640.html
+2025-04-29 19:26:43,692 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 19:26:54,744 - INFO - Начинаем новую проверку...
+2025-04-29 19:27:08,907 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
+2025-04-29 19:27:08,972 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192708.png
+2025-04-29 19:27:08,976 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192708.html
+2025-04-29 19:27:12,481 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 19:27:23,457 - INFO - Начинаем новую проверку...
+2025-04-29 19:27:25,427 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
+2025-04-29 19:27:25,494 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192725.png
+2025-04-29 19:27:25,497 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192725.html
+2025-04-29 19:27:28,962 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 19:27:40,214 - INFO - Начинаем новую проверку...
+2025-04-29 19:27:42,006 - ERROR - Ошибка в основном цикле: Не удалось загрузить начальную страницу
+2025-04-29 19:27:42,092 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192742.png
+2025-04-29 19:27:42,102 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192742.html
+2025-04-29 19:27:45,608 - INFO - patching driver executable /home/v/.local/share/undetected_chromedriver/undetected_chromedriver
+2025-04-29 19:27:56,935 - INFO - Начинаем новую проверку...
+2025-04-29 19:27:59,445 - INFO - Сохранен скриншот ошибки: errors/province_selection_error_20250429_192759.png
+2025-04-29 19:27:59,449 - INFO - Сохранен HTML ошибки: errors/province_selection_error_20250429_192759.html
+2025-04-29 19:27:59,449 - ERROR - Ошибка в основном цикле: Ошибка выбора провинции
+2025-04-29 19:27:59,521 - INFO - Сохранен скриншот ошибки: errors/main_loop_error_20250429_192759.png
+2025-04-29 19:27:59,529 - INFO - Сохранен HTML ошибки: errors/main_loop_error_20250429_192759.html

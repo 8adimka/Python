@@ -17,20 +17,16 @@ class RequestClient:
         self.driver = self._init_driver()
         self.base_url = "https://icp.administracionelectronica.gob.es"
         self.current_url = ""
-        self.random_delay = lambda: time.sleep(random.uniform(0.5, 2.5))  # Более короткие случайные задержки
+        self.random_delay = lambda: time.sleep(random.uniform(0.5, 2.5))
 
     def _init_driver(self):
         options = uc.ChromeOptions()
         
-        # Настройки профиля
         if DEBUG_MODE:
-            # В режиме отладки используем постоянный профиль
             options.add_argument("--user-data-dir=/home/v/.config/selenium-profile")
         else:
-            # В продакшене используем новый профиль для каждой сессии
             options.add_argument(f"--user-data-dir=/tmp/chrome_profile_{uuid.uuid4()}")
         
-        # Общие настройки
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--disable-dev-shm-usage")
@@ -39,22 +35,18 @@ class RequestClient:
         options.add_argument("--disable-gpu")
         options.add_argument("--log-level=3")
         
-        # Случайный User-Agent
         user_agents = [
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
         ]
         options.add_argument(f"--user-agent={random.choice(user_agents)}")
         
-        # Инициализация драйвера
         driver = uc.Chrome(
             options=options,
             headless=False,
             use_subprocess=True
         )
         
-        # Установка случайного размера окна
         width = random.randint(1200, 1400)
         height = random.randint(800, 1000)
         driver.set_window_size(width, height)
@@ -62,42 +54,35 @@ class RequestClient:
         return driver
 
     def _human_like_movement(self, element=None):
-        """Имитация человеческих движений мыши"""
         try:
             if element:
-                # Плавное перемещение к элементу
                 self.driver.execute_script("""
-                    const element = arguments[0];
-                    const rect = element.getBoundingClientRect();
-                    const centerX = rect.left + rect.width/2;
-                    const centerY = rect.top + rect.height/2;
+                    const elem = arguments[0];
+                    const rect = elem.getBoundingClientRect();
+                    const targetX = rect.left + rect.width/2;
+                    const targetY = rect.top + rect.height/2;
                     
-                    const mouseMove = (fromX, fromY, toX, toY, steps) => {
-                        const dx = (toX - fromX) / steps;
-                        const dy = (toY - fromY) / steps;
+                    const steps = 15 + Math.floor(Math.random() * 10);
+                    const fromX = window.innerWidth/2 + (Math.random() * 200 - 100);
+                    const fromY = window.innerHeight/2 + (Math.random() * 200 - 100);
+                    
+                    for (let i = 0; i <= steps; i++) {
+                        const x = fromX + (targetX - fromX) * Math.pow(i/steps, 0.5);
+                        const y = fromY + (targetY - fromY) * Math.pow(i/steps, 0.5);
                         
-                        for (let i = 0; i < steps; i++) {
-                            window.dispatchEvent(new MouseEvent('mousemove', {
-                                clientX: fromX + dx * i,
-                                clientY: fromY + dy * i,
-                                bubbles: true
-                            }));
-                        }
-                    };
-                    
-                    mouseMove(
-                        window.innerWidth/2, window.innerHeight/2,
-                        centerX, centerY,
-                        10 + Math.floor(Math.random() * 10)
-                    );
+                        window.dispatchEvent(new MouseEvent('mousemove', {
+                            clientX: x,
+                            clientY: y,
+                            bubbles: true
+                        }));
+                    }
                 """, element)
             
-            # Случайная прокрутка
-            scroll_type = random.choice(["up", "down", "page"])
-            if scroll_type == "up":
-                self.driver.execute_script("window.scrollBy(0, -window.innerHeight/2);")
-            elif scroll_type == "down":
-                self.driver.execute_script("window.scrollBy(0, window.innerHeight/2);")
+            scroll_action = random.choice(["up", "down", "random"])
+            if scroll_action == "up":
+                self.driver.execute_script("window.scrollBy(0, -window.innerHeight/3);")
+            elif scroll_action == "down":
+                self.driver.execute_script("window.scrollBy(0, window.innerHeight/3);")
             else:
                 self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight * Math.random());")
             
@@ -106,75 +91,7 @@ class RequestClient:
         except Exception as e:
             logging.warning(f"Ошибка при имитации движений: {str(e)}")
 
-    def load_initial_page(self):
-        try:
-            # Очистка cookies перед началом
-            if not DEBUG_MODE:
-                self.driver.delete_all_cookies()
-            
-            self.driver.get(f"{self.base_url}/icpco/acOpcDirect")
-            self.random_delay()
-            
-            # Имитация активности пользователя
-            self._human_like_movement()
-            
-            return not self._is_blocked()
-            
-        except Exception as e:
-            logging.error(f"Ошибка загрузки начальной страницы: {str(e)}")
-            self.save_error_screenshot("initial_page_load_error")
-            return False
-
-    def select_province(self, province_name):
-        try:
-            # Ожидание загрузки страницы
-            WebDriverWait(self.driver, WAIT_TIMEOUT).until(
-    lambda d: (
-        "no hay citas disponibles" in d.page_source.lower() or
-        "disponibilidad de citas" in d.page_source.lower() or
-        self._is_blocked()
-    )
-)
-            self._human_like_movement()
-
-            # Проверка на блокировку
-            if self._is_blocked():
-                return False
-
-            # Находим элемент select
-            select_element = WebDriverWait(self.driver, WAIT_TIMEOUT).until(
-                EC.presence_of_element_located((By.NAME, "form"))
-            )
-            self._human_like_movement(select_element)
-            
-            # Выбор провинции
-            select = Select(select_element)
-            select.select_by_visible_text(province_name)
-            self.random_delay()
-
-            # Нажатие кнопки Aceptar
-            accept_button = WebDriverWait(self.driver, WAIT_TIMEOUT).until(
-                EC.element_to_be_clickable((By.ID, "btnAceptar"))
-            )
-            self._human_like_movement(accept_button)
-            accept_button.click()
-            self.random_delay()
-
-            # Ожидание перехода
-            WebDriverWait(self.driver, WAIT_TIMEOUT).until(
-                EC.url_contains("/icpco/citar?p=")
-            )
-            self.current_url = self.driver.current_url
-            
-            return not self._is_blocked()
-            
-        except Exception as e:
-            logging.error(f"Ошибка выбора провинции: {str(e)}")
-            self.save_error_screenshot("province_selection_error")
-            return False
-
     def _is_blocked(self):
-        """Проверяет, заблокирован ли доступ"""
         blocked_texts = [
             "acceso denegado", "blocked", "detected unusual traffic",
             "error de seguridad", "distributed denial-of-service",
@@ -184,7 +101,6 @@ class RequestClient:
         return any(text in page_text for text in blocked_texts)
 
     def save_error_screenshot(self, prefix="error"):
-        """Сохраняет скриншот и HTML страницы при ошибке"""
         os.makedirs("errors", exist_ok=True)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         
@@ -198,6 +114,59 @@ class RequestClient:
         logging.info(f"Сохранен HTML ошибки: {html_path}")
         
         return screenshot_path, html_path
+
+    def load_initial_page(self):
+        try:
+            if not DEBUG_MODE:
+                self.driver.delete_all_cookies()
+            
+            self.driver.get(f"{self.base_url}/icpco/acOpcDirect")
+            self._human_like_movement()
+            
+            return not self._is_blocked()
+            
+        except Exception as e:
+            logging.error(f"Ошибка загрузки начальной страницы: {str(e)}")
+            self.save_error_screenshot("initial_page_load_error")
+            return False
+
+    def select_province(self, province_name):
+        try:
+            WebDriverWait(self.driver, WAIT_TIMEOUT).until(
+                EC.presence_of_element_located((By.TAG_NAME, "body"))
+            )
+            self._human_like_movement()
+
+            if self._is_blocked():
+                return False
+
+            select_element = WebDriverWait(self.driver, WAIT_TIMEOUT).until(
+                EC.presence_of_element_located((By.NAME, "form"))
+            )
+            self._human_like_movement(select_element)
+            
+            select = Select(select_element)
+            select.select_by_visible_text(province_name)
+            self.random_delay()
+
+            accept_button = WebDriverWait(self.driver, WAIT_TIMEOUT).until(
+                EC.element_to_be_clickable((By.ID, "btnAceptar"))
+            )
+            self._human_like_movement(accept_button)
+            accept_button.click()
+            self.random_delay()
+
+            WebDriverWait(self.driver, WAIT_TIMEOUT).until(
+                EC.url_contains("/icpco/citar?p=")
+            )
+            self.current_url = self.driver.current_url
+            
+            return not self._is_blocked()
+            
+        except Exception as e:
+            logging.error(f"Ошибка выбора провинции: {str(e)}")
+            self.save_error_screenshot("province_selection_error")
+            return False
 
     def select_tramite(self, tramite_name):
         try:
@@ -290,10 +259,9 @@ class RequestClient:
                 elem.clear()
                 self.random_delay()
                 
-                # Имитация человеческого ввода
                 for i, char in enumerate(value):
                     elem.send_keys(char)
-                    if i % 3 == 0:  # Случайные паузы
+                    if i % 3 == 0:
                         time.sleep(random.uniform(0.05, 0.2))
             
             country_select = WebDriverWait(self.driver, WAIT_TIMEOUT).until(
@@ -398,12 +366,11 @@ class RequestClient:
 
     def restart_browser(self):
         try:
-            if self.driver:
-                self.driver.quit()
+            self.driver.quit()
         except Exception as e:
             logging.error(f"Ошибка при закрытии браузера: {str(e)}")
         finally:
-            time.sleep(3)  # Пауза перед перезапуском
+            time.sleep(3)
             self.driver = self._init_driver()
             self.current_url = ""
             if not DEBUG_MODE:
@@ -411,7 +378,7 @@ class RequestClient:
 
     def close(self):
         try:
-            if self.driver:
-                self.driver.quit()
+            self.driver.quit()
         except Exception as e:
             logging.error(f"Ошибка при закрытии браузера: {str(e)}")
+            
