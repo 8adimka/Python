@@ -10,7 +10,15 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import undetected_chromedriver as uc
-from settings import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, PERSONAL_DATA, WAIT_TIMEOUT, MIN_DELAY, MAX_DELAY
+from settings import WAIT_TIMEOUT, MIN_DELAY, MAX_DELAY
+from dotenv import load_dotenv
+import os
+
+load_dotenv() # Загружает из .env в переменные окружения
+
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+PERSONAL_DATA = os.getenv("PERSONAL_DATA")
 
 logging.basicConfig(
     level=logging.INFO,
@@ -297,4 +305,3 @@ class RequestClient:
     def close(self):
         if self.driver:
             self.driver.quit()
-            
