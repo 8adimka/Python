@@ -2,7 +2,7 @@ import time
 import random
 from request_client import RequestClient
 import logging
-from settings import MAX_RETRIES
+from settings import MAX_RETRIES, RATE_LIMIT_DELAY
 
 logging.basicConfig(
     level=logging.INFO,
@@ -33,7 +33,13 @@ def main():
             
             for step_name, step_func, *args in steps:
                 logging.info(f"Выполняется: {step_name}")
-                if not step_func(*args[0] if args else []):
+                result = step_func(*args[0] if args else [])
+                if result == "too_many_attempts":
+                    logging.warning("Обнаружено слишком много попыток, ожидаем 5 минут...")
+                    time.sleep(RATE_LIMIT_DELAY)
+                    retries -= 1  # Не считать эту попытку
+                    raise Exception("Повтор после too_many_attempts")
+                elif not result:
                     raise Exception(f"Ошибка на шаге: {step_name}")
                     break
             
@@ -54,7 +60,13 @@ def main():
                     
                     # Быстро проходим шаги заново
                     for step_name, step_func, *args in steps:
-                        if not step_func(*args[0] if args else []):
+                        result = step_func(*args[0] if args else [])
+                        if result == "too_many_attempts":
+                            logging.warning("Обнаружено слишком много попыток, ожидаем 5 минут...")
+                            time.sleep(RATE_LIMIT_DELAY)
+                            retries -= 1
+                            raise Exception("Повтор после too_many_attempts")
+                        elif not result:
                             raise Exception(f"Ошибка повторного прохождения шага {step_name}")
 
         except Exception as e:

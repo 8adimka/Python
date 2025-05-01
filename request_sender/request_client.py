@@ -1,4 +1,3 @@
-import os
 import time
 import random
 import logging
@@ -28,8 +27,6 @@ class RequestClient:
 
     def _init_driver(self):
         options = uc.ChromeOptions()
-        
-        # 🔥 Критически важные параметры для обхода защиты
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--disable-infobars")
         options.add_argument("--disable-popup-blocking")
@@ -42,7 +39,6 @@ class RequestClient:
         options.add_argument(f"--window-size={random.randint(1200,1400)},{random.randint(800,1000)}")
         options.add_argument(f"--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/{random.randint(90,115)}.0.0.0 Safari/537.36")
         
-        # 🔥 Указываем версию Chrome (ваша текущая версия 135)
         self.driver = uc.Chrome(
             options=options,
             headless=False,
@@ -50,7 +46,6 @@ class RequestClient:
             version_main=135
         )
         
-        # 🔥 Скрипт для маскировки WebDriver
         self.driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
             "source": """
                 Object.defineProperty(navigator, 'webdriver', {
@@ -68,31 +63,45 @@ class RequestClient:
             """
         })
 
+    def _check_too_many_attempts(self):
+        """Проверка на сообщение 'Too Many Requests'"""
+        try:
+            # Проверяем как текст страницы, так и заголовки H1
+            page_text = self.driver.page_source.lower()
+            if "too many requests" in page_text:
+                return True
+            
+            # Дополнительная проверка по заголовкам
+            h1_elements = self.driver.find_elements(By.TAG_NAME, "h1")
+            if any("too many requests" in h1.text.lower() for h1 in h1_elements):
+                return True
+                
+            return False
+        except Exception:
+            return False
+
     def _human_like_mouse_movement(self, element):
-        """🔥 Имитация человеческих движений мыши"""
         try:
             actions = ActionChains(self.driver)
             actions.move_to_element_with_offset(element, random.randint(-5, 5), random.randint(-5, 5))
             actions.perform()
             time.sleep(random.uniform(0.1, 0.3))
-        except:
+        except Exception:
             pass
 
     def _human_like_typing(self, element, text):
-        """🔥 Имитация человеческого ввода"""
         try:
             for char in text:
                 element.send_keys(char)
                 time.sleep(random.uniform(0.05, 0.2))
-                if random.random() > 0.9:  # Иногда "ошибаемся" и исправляемся
+                if random.random() > 0.9:  # 10% chance to make a "mistake"
                     element.send_keys(Keys.BACKSPACE)
                     time.sleep(random.uniform(0.1, 0.3))
                     element.send_keys(char)
-        except:
+        except Exception:
             element.send_keys(text)
 
     def _handle_blocked_page(self):
-        """🔥 Обработка страницы с блокировкой"""
         if "The requested URL was rejected" in self.driver.page_source:
             logging.warning("Обнаружена блокировка! Перезапускаем браузер...")
             self.restart_browser()
@@ -100,7 +109,6 @@ class RequestClient:
         return True
 
     def _handle_initial_error(self):
-        """🔥 Обработка первичной страницы с ошибкой"""
         try:
             if "infogenerica" in self.driver.current_url:
                 accept_btn = WebDriverWait(self.driver, WAIT_TIMEOUT).until(
@@ -111,7 +119,7 @@ class RequestClient:
                 self.random_delay()
                 return True
             return False
-        except:
+        except Exception:
             return False
 
     def load_initial_page(self):
@@ -119,13 +127,10 @@ class RequestClient:
             self.driver.get(f"{self.base_url}/icpco/acOpcDirect")
             self.random_delay()
             
-            # 🔥 Проверяем блокировку
             if not self._handle_blocked_page():
                 return False
             
-            # 🔥 Проверяем наличие страницы с ошибкой
             if not self._handle_initial_error():
-                # Проверяем, что мы на нужной странице
                 if "index" not in self.driver.current_url and "acOpcDirect" not in self.driver.current_url:
                     return False
             
@@ -159,31 +164,42 @@ class RequestClient:
             return False
 
     def restart_cycle(self):
-        # 🔥 Проверяем, на какой странице находимся
         if "acCitar" in self.driver.current_url:
             return self._click_element(By.ID, "btnSalir")
         elif "infogenerica" in self.driver.current_url:
             return self._handle_initial_error()
         else:
-            # Если на другой странице, возвращаемся к началу
             self.driver.get(f"{self.base_url}/icpco/acOpcDirect")
             self.random_delay()
             return self._handle_blocked_page()
 
     def check_slots(self):
         try:
-            # 🔥 Проверяем текущую страницу
+            # Сначала проверяем на too many attempts
+            if self._check_too_many_attempts():
+                return {"status": "too_many_attempts"}
+
             if "acValidarEntrada" in self.driver.current_url:
                 if not self._click_element(By.ID, "btnEnviar"):
                     return {"status": "error"}
             
-            WebDriverWait(self.driver, WAIT_TIMEOUT).until(
-                lambda d: "no hay citas disponibles" in d.page_source.lower() or 
-                         "disponibilidad de citas" in d.page_source.lower())
-            
-            if "no hay citas disponibles" in self.driver.page_source.lower():
-                return {"status": "no_slots"}
-            else:
+            try:
+                WebDriverWait(self.driver, WAIT_TIMEOUT).until(
+                    lambda d: "no hay citas disponibles" in d.page_source.lower() or 
+                             "disponibilidad de citas" in d.page_source.lower())
+                
+                if "no hay citas disponibles" in self.driver.page_source.lower():
+                    return {"status": "no_slots"}
+                return {"status": "slots_available"}
+                
+            except Exception:
+                # Если не нашли стандартные сообщения, проверяем на too many attempts ещё раз
+                if self._check_too_many_attempts():
+                    return {"status": "too_many_attempts"}
+                
+                # Все остальные случаи считаем возможными слотами
+                logging.warning("Нестандартный ответ страницы, возможно есть слоты!")
+                self.send_telegram_alert("ВНИМАНИЕ: Нестандартный ответ страницы, проверьте вручную!")
                 return {"status": "slots_available"}
                 
         except Exception as e:
@@ -192,12 +208,14 @@ class RequestClient:
 
     def select_province(self, province_name):
         try:
-            # 🔥 Проверяем, не находимся ли мы уже на странице с выбором провинции
             if "index" not in self.driver.current_url:
                 self.driver.get(f"{self.base_url}/icpco/index")
                 self.random_delay()
                 if not self._handle_blocked_page():
                     return False
+            
+            if self._check_too_many_attempts():
+                return "too_many_attempts"
             
             return (self._select_dropdown(By.NAME, "form", province_name) and 
                    self._click_element(By.ID, "btnAceptar"))
@@ -207,9 +225,11 @@ class RequestClient:
 
     def select_tramite(self, tramite_name):
         try:
-            # 🔥 Ждем загрузки страницы с выбором trámite
             WebDriverWait(self.driver, WAIT_TIMEOUT).until(
                 lambda d: "citar?p=" in d.current_url)
+            
+            if self._check_too_many_attempts():
+                return "too_many_attempts"
             
             return (self._select_dropdown(By.ID, "tramiteGrupo[1]", tramite_name) and 
                    self._click_element(By.ID, "btnAceptar"))
@@ -219,9 +239,11 @@ class RequestClient:
 
     def submit_info_page(self):
         try:
-            # 🔥 Ждем загрузки страницы с информацией
             WebDriverWait(self.driver, WAIT_TIMEOUT).until(
                 lambda d: "acInfo" in d.current_url)
+            
+            if self._check_too_many_attempts():
+                return "too_many_attempts"
             
             return self._click_element(By.ID, "btnEntrar")
         except Exception as e:
@@ -230,14 +252,15 @@ class RequestClient:
 
     def fill_personal_data(self):
         try:
-            # 🔥 Ждем загрузки страницы с вводом данных
             WebDriverWait(self.driver, WAIT_TIMEOUT).until(
                 lambda d: "acEntrada" in d.current_url)
             
-            # 🔥 Заполняем текстовые поля с человеческим вводом
+            if self._check_too_many_attempts():
+                return "too_many_attempts"
+            
             for field_id, value in PERSONAL_DATA.items():
                 if field_id == 'txtPaisNac':
-                    continue  # Обрабатываем отдельно
+                    continue
                 
                 elem = WebDriverWait(self.driver, WAIT_TIMEOUT).until(
                     EC.presence_of_element_located((By.ID, field_id)))
@@ -245,7 +268,6 @@ class RequestClient:
                 self._human_like_typing(elem, value)
                 self.random_delay()
             
-            # 🔥 Обрабатываем выпадающий список для страны
             if not self._select_dropdown(By.ID, "txtPaisNac", PERSONAL_DATA['txtPaisNac']):
                 return False
             
@@ -256,11 +278,12 @@ class RequestClient:
 
     def confirm_data(self):
         try:
-            # 🔥 Нажимаем кнопку подтверждения данных
+            if self._check_too_many_attempts():
+                return "too_many_attempts"
+            
             if not self._click_element(By.ID, "btnEnviar"):
                 return False
             
-            # 🔥 Ждем перехода на следующую страницу
             WebDriverWait(self.driver, WAIT_TIMEOUT).until(
                 lambda d: "acValidarEntrada" in d.current_url)
             
@@ -287,7 +310,7 @@ class RequestClient:
         try:
             if self.driver:
                 self.driver.quit()
-            time.sleep(random.uniform(2, 5))  # 🔥 Задержка между перезапусками
+            time.sleep(random.uniform(2, 5))
             self._init_driver()
             return True
         except Exception as e:
