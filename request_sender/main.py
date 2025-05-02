@@ -51,6 +51,10 @@ def main():
                     client.send_telegram_alert("СРОЧНО: Доступны citas!")
                     time.sleep(3600)  # Даем время на ручное подтверждение
                     return
+                elif result["status"] == "form_filled":
+                    logging.critical("ФОРМА БРОНИРОВАНИЯ ЗАПОЛНЕНА!")
+                    time.sleep(3600)  # Даем время на ручное подтверждение
+                    return
                 elif result["status"] == "error":
                     raise Exception("Ошибка проверки слотов")
                 else:

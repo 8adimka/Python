@@ -66,12 +66,10 @@ class RequestClient:
     def _check_too_many_attempts(self):
         """Проверка на сообщение 'Too Many Requests'"""
         try:
-            # Проверяем как текст страницы, так и заголовки H1
             page_text = self.driver.page_source.lower()
             if "too many requests" in page_text:
                 return True
             
-            # Дополнительная проверка по заголовкам
             h1_elements = self.driver.find_elements(By.TAG_NAME, "h1")
             if any("too many requests" in h1.text.lower() for h1 in h1_elements):
                 return True
@@ -120,6 +118,55 @@ class RequestClient:
                 return True
             return False
         except Exception:
+            return False
+
+    def _is_booking_page(self):
+        """Проверка, что это страница бронирования"""
+        try:
+            return ("CITA PREVIA EXTRANJERÍA" in self.driver.page_source and 
+                    "POLICIA- EXPEDICIÓN/RENOVACIÓN DE DOCUMENTOS DE SOLICITANTES DE ASILO" in self.driver.page_source and
+                    "Identidad del usuario de cita" in self.driver.page_source)
+        except Exception:
+            return False
+
+    def _fill_booking_form(self):
+        """Заполнение формы бронирования"""
+        try:
+            # 1. Нажимаем кнопку Siguiente на первой странице
+            if not self._click_element(By.ID, "btnSiguiente"):
+                return False
+
+            # 2. Заполняем данные на второй странице
+            WebDriverWait(self.driver, WAIT_TIMEOUT).until(
+                EC.presence_of_element_located((By.ID, "txtTelefonoCitado")))
+
+            # Заполняем телефон
+            phone_field = self.driver.find_element(By.ID, "txtTelefonoCitado")
+            phone_field.clear()
+            self._human_like_typing(phone_field, "661315361")
+
+            # Заполняем email (первое поле)
+            email1_field = self.driver.find_element(By.ID, "emailUNO")
+            email1_field.clear()
+            self._human_like_typing(email1_field, "m8adimka@gmail.com")
+
+            # Заполняем email (второе поле)
+            email2_field = self.driver.find_element(By.ID, "emailDOS")
+            email2_field.clear()
+            self._human_like_typing(email2_field, "m8adimka@gmail.com")
+
+            # Заполняем motivo
+            motivo_field = self.driver.find_element(By.ID, "txtObservaciones")
+            motivo_field.clear()
+            self._human_like_typing(motivo_field, "Renovación/prórroga de una tarjeta roja por su caducidad.")
+
+            # Нажимаем Siguiente
+            if not self._click_element(By.ID, "btnSiguiente"):
+                return False
+
+            return True
+        except Exception as e:
+            logging.error(f"Ошибка заполнения формы бронирования: {str(e)}")
             return False
 
     def load_initial_page(self):
@@ -196,6 +243,16 @@ class RequestClient:
                 # Если не нашли стандартные сообщения, проверяем на too many attempts ещё раз
                 if self._check_too_many_attempts():
                     return {"status": "too_many_attempts"}
+                
+                # Проверяем, не страница ли это бронирования
+                if self._is_booking_page():
+                    logging.critical("НАЙДЕНЫ СВОБОДНЫЕ МЕСТА! ЗАПОЛНЯЕМ ФОРМУ...")
+                    if self._fill_booking_form():
+                        self.send_telegram_alert("СРОЧНО: Доступны citas! Форма заполнена, требуется ручное подтверждение!")
+                        return {"status": "form_filled"}
+                    else:
+                        self.send_telegram_alert("СРОЧНО: Доступны citas! Ошибка заполнения формы, требуется ручное вмешательство!")
+                        return {"status": "error"}
                 
                 # Все остальные случаи считаем возможными слотами
                 logging.warning("Нестандартный ответ страницы, возможно есть слоты!")

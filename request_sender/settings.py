@@ -8,6 +8,7 @@ load_dotenv()
 
 # Получаем PERSONAL_DATA из .env
 PERSONAL_DATA = ast.literal_eval(os.getenv('PERSONAL_DATA'))
+BOOKING_DATA = ast.literal_eval(os.getenv('BOOKING_DATA'))
 
 # Настройки времени
 MIN_DELAY = 1.5
