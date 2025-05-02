@@ -43,7 +43,7 @@ class RequestClient:
             options=options,
             headless=False,
             use_subprocess=True,
-            version_main=135
+            version_main=136
         )
         
         self.driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {

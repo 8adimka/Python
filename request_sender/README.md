@@ -108,11 +108,35 @@ PERSONAL_DATA='{
 # Данные Telegram-бота
 TELEGRAM_BOT_TOKEN="123456789:AAFm2e4f5g6h7i8j9k0l1m2n3o4p5q6r7s8"
 TELEGRAM_CHAT_ID="987654321"
+
 🚀 Запуск программы
 bash
 # Linux
 source ~/venv/cita_checker/bin/activate
 python3.11 main.py
+
+*Пара небольших дополнений - в файле /request_client.py
+есть строка - version_main=136
+в участке self.driver = uc.Chrome(
+            options=options,
+            headless=False,
+            use_subprocess=True,
+            version_main=136
+        )
+
+не забудьсе синхнонизировать вашу версию Google chrome и ChromeWebDriver
+Вводим команды:
+chromedriver --version
+-> Узнаём версию WebDriver
+
+google-chrome-stable --version
+-> Узнаём версию google-chrome
+
+Желательно одинаковые, если нет то меняем - version_main=136 на версию вашего google-chrome
+
+**Для чистоты перед запуском скрипта рекомендую выполнить (не обязательно)
+pkill -f chromedriver && pkill -f chrome && rm -rf /home/v/.config/selenium-profile
+т.е. убить процессы браузера и почистить кэш selenium
 
 # Windows
 py -3.11 main.py
