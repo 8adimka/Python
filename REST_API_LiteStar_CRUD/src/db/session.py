@@ -2,9 +2,9 @@ from __future__ import annotations
 from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from lib.settings import settings
-from advanced_alchemy import SQLAlchemyAsyncRepository
+from .models import Base
 
-engine = create_async_engine(settings.DATABASE_URL)
+engine = create_async_engine(str(settings.DATABASE_URL))
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
 
 async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
@@ -15,7 +15,7 @@ async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
             await session.rollback()
             raise
 
-async def provide_transaction(db_session: AsyncSession) -> AsyncGenerator[AsyncSession, None]:
-    async with db_session.begin():
-        yield db_session
+async def create_db_and_tables():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
         

@@ -35,7 +35,11 @@ docker-compose up -d
 Приложение будет доступно по адресу http://localhost:8000/api/docs
 (Swagger UI)
 
-3. Проверка работоспособности
+3. Проверка работоспособности:
+curl -v http://localhost:8000/users
+
+docker-compose logs app
+
 Создание пользователя:
 
 POST /users
@@ -48,6 +52,11 @@ json
   "surname": "Doe",
   "password": "securepassword123"
 }
+
+curl -X POST "http://localhost:8000/users" \
+-H "Content-Type: application/json" \
+-d '{"name": "John", "surname": "Doe", "password": "secure123"}'
+
 Получение списка пользователей:
 
 GET /users
@@ -69,6 +78,10 @@ json
 Удаление пользователя:
 
 DELETE /users/1
+
+С осторожностью, по необходимости:
+docker-compose down -v
+docker system prune -a
 
 4. Особенности реализации
 Использован Advanced-SQLAlchemy для работы с базой данных

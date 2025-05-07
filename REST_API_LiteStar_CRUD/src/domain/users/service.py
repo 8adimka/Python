@@ -1,16 +1,15 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING
+from typing import Tuple, List
 from litestar.exceptions import NotFoundException
-from sqlalchemy import select
+from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from db.models import UserModel
-
-if TYPE_CHECKING:
-    from litestar.pagination import OffsetPagination
+from domain.users.repository import UserRepository
 
 class UserService:
     def __init__(self, session: AsyncSession):
         self.session = session
+        self.repository = UserRepository(session=session)  # Используем наш репозиторий
 
     async def create(self, data: dict) -> UserModel:
         user = UserModel(**data)
@@ -36,12 +35,16 @@ class UserService:
         await self.session.delete(user)
         await self.session.commit()
 
-    async def list_and_count(self, limit_offset) -> tuple[list[UserModel], int]:
-        result = await self.session.execute(
-            select(UserModel)
-            .offset(limit_offset.offset)
-            .limit(limit_offset.limit)
-        )
-        total = await self.session.scalar(select(UserModel).count())
-        return result.scalars().all(), total
+    async def list_and_count(self, limit: int, offset: int) -> Tuple[List[UserModel], int]:
+        # Получаем список пользователей
+        users = (await self.session.execute(
+            select(UserModel).offset(offset).limit(limit)
+        )).scalars().all()
+        
+        # Получаем общее количество
+        total = (await self.session.execute(
+            select(func.count(UserModel.id))
+        )).scalar_one()
+        
+        return users, total
     

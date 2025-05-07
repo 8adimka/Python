@@ -1,30 +1,18 @@
-from logging.config import fileConfig
-from sqlalchemy.ext.asyncio import create_async_engine
 from alembic import context
-import sys
-import os
+from sqlalchemy.ext.asyncio import create_async_engine
+from db.models import Base
+from lib.settings import settings
 
-# Добавляем путь к src в PYTHONPATH
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-
-# Импортируем ваши модели
-from db.models import UserModel
-from db.session import async_session_maker
-
-config = context.config
-fileConfig(config.config_file_name)
-
-target_metadata = UserModel.metadata
+target_metadata = Base.metadata
 
 def run_migrations_online():
-    connectable = async_session_maker.bind
+    connectable = create_async_engine(str(settings.DATABASE_URL))
 
     with connectable.connect() as connection:
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
-            compare_type=True,
-            include_schemas=True
+            compare_type=True
         )
 
         with context.begin_transaction():
