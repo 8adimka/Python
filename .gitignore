@@ -13,4 +13,15 @@ c3l4_DAO/labor_1/.env
 interview_bot_p/.env
 interview_bot_p/op_ai_testing.py
 request_sender/__pycache__/
-
+c2l1_file_work/__pycache__/
+c2l3_Class_file/__pycache__/
+c3l3_blueprint_Pytest/__pycache__/
+c3l4_DAO/labor_1/__pycache__/
+c3l4_DAO/labor_2/__pycache__/
+c3l4_DAO/practice_works/__pycache__/
+c3l4_DAO/labor_3_testing_API_get_post_etc/__pycache__/
+lesson27_Django/django_project/__pycache__/
+lesson27_Django/vacancies/__pycache__/
+mybook_SQL_blueprint/enter/__pycache__/
+Head_hunter_DB_search_project/dto/__pycache__/
+CodeWars/Tests/__pycache__/
