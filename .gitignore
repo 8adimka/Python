@@ -1,15 +1,16 @@
 venv
 .venv
 .vscode
-/home/v/Python/Head_hunter_DB_search_project/__pycache__/
-/home/v/Python/Head_hunter_DB_search_project/.env
-/home/v/Python/LeetCode_Stolyarov_training/__pycache__/
-/home/v/Python/CodeWars/__pycache__/
-/home/v/Python/REST_API_LiteStar_CRUD/REST_API_LiteStar_ENV
-/home/v/Python/REST_API_LiteStar_CRUD/.env
-/home/v/Python/request_sender/.venv
-/home/v/Python/c3l4_DAO/labor_1/.env
-/home/v/Python/interview_bot_p/.env
-/home/v/Python/interview_bot_p/op_ai_testing.py
-/home/v/Python/request_sender/__pycache__/
+__pycache__/
+Head_hunter_DB_search_project/__pycache__/
+Head_hunter_DB_search_project/.env
+LeetCode_Stolyarov_training/__pycache__/
+CodeWars/__pycache__/
+REST_API_LiteStar_CRUD/REST_API_LiteStar_ENV
+REST_API_LiteStar_CRUD/.env
+request_sender/.venv
+c3l4_DAO/labor_1/.env
+interview_bot_p/.env
+interview_bot_p/op_ai_testing.py
+request_sender/__pycache__/
 
