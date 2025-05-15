@@ -1,7 +1,7 @@
 venv
 .venv
 .vscode
-__pycache__/
+**/__pycache__/
 Head_hunter_DB_search_project/__pycache__/
 Head_hunter_DB_search_project/.env
 LeetCode_Stolyarov_training/__pycache__/
@@ -25,3 +25,5 @@ lesson27_Django/vacancies/__pycache__/
 mybook_SQL_blueprint/enter/__pycache__/
 Head_hunter_DB_search_project/dto/__pycache__/
 CodeWars/Tests/__pycache__/
+REST_API_LiteStar_CRUD/src/__pycache__/
+interview_bot_p/bot/__pycache__/
