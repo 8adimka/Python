@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 import os
 from pynput import keyboard as kb
 
-# Настройка логирования
+# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -24,26 +24,23 @@ class DeepSeekSolver:
         self.API_URL = "https://api.deepseek.com/v1/chat/completions"
         self.API_KEY = self._get_api_key()
         self.last_request_time = 0
-        self.RATE_LIMIT_DELAY = 3  # Задержка между запросами (сек)
+        self.RATE_LIMIT_DELAY = 3  # Delay between requests in seconds
+        self.TYPING_DELAY_BASE = 0.1  # Base delay for typing
 
     def _get_api_key(self) -> str:
-        """Безопасное получение API ключа"""
-        # Загружаем переменные из .env
+        """Safely retrieves the API key"""
         load_dotenv()
-        try: 
-            key = os.getenv("DEEPSEEK_API_KEY")
-            if not key:
-                raise ValueError("API key not found in environment variables")
-            return key
-        except Exception as e:
-            logging.error(f"API key error: {e}")
-            sys.exit(1)
+        key = os.getenv("DEEPSEEK_API_KEY")
+        if not key:
+            raise ValueError("API key not found in environment variables")
+        return key
 
     def send_to_api(self, prompt: str) -> Optional[str]:
-        """Отправка запроса к API с обработкой ошибок"""
+        """Sends a request to the API with error handling"""
         current_time = time.time()
         if current_time - self.last_request_time < self.RATE_LIMIT_DELAY:
-            time.sleep(self.RATE_LIMIT_DELAY - (current_time - self.last_request_time))
+            sleep_time = self.RATE_LIMIT_DELAY - (current_time - self.last_request_time)
+            time.sleep(sleep_time)
 
         headers = {
             "Authorization": f"Bearer {self.API_KEY}",
@@ -54,7 +51,7 @@ class DeepSeekSolver:
             "model": "deepseek-chat",
             "messages": [{
                 "role": "user",
-                "content": f"{prompt}\n\nРеши задачу. Ответ должен содержать только решение без пояснений."
+                "content": f"{prompt}\n\nSolve the task. The answer should contain only the solution without explanations."
             }],
             "temperature": 0.7,
             "max_tokens": 2000
@@ -74,49 +71,69 @@ class DeepSeekSolver:
                 
             response.raise_for_status()
             result = response.json()
+            
+            if not result.get('choices'):
+                logging.error("Invalid API response format: 'choices' field not found.")
+                return None
+                
+            choice = result['choices'][0]
+            if not choice.get('message'):
+                logging.error("Invalid API response format: 'message' field not found.")
+                return None
+                
             self.last_request_time = time.time()
-            return result.get('choices', [{}])[0].get('message', {}).get('content', '')
+            return choice['message'].get('content', '')
             
         except requests.exceptions.RequestException as e:
             logging.error(f"API Request failed: {e}")
             return None
+        except Exception as e:
+            logging.error(f"Unexpected error while processing API response: {e}")
+            return None
 
-    @staticmethod
-    def human_like_typing(text: str) -> None:
-        """Имитация человеческого ввода с ошибками"""
+    def human_like_typing(self, text: str) -> None:
+        """Simulates human-like typing with errors"""
         if not text:
             return
 
+        # Start typing with a slight initial delay
+        time.sleep(random.uniform(0.5, 1.5))
+
         for char in text:
             try:
+                # Simulate varying typing speeds
+                delay = random.uniform(0.05, 0.15)
+                time.sleep(delay)
+                
                 keyboard.press(char)
                 keyboard.release(char)
-                time.sleep(random.uniform(0.02, 0.2))
-                
-                # Имитация ошибок с вероятностью 2%
+
+                # Randomly introduce errors
                 if random.random() < 0.02:
-                    # Стирание 1-3 символов
-                    for _ in range(random.randint(1, 3)):
+                    # Backspace a random number of characters (max 3)
+                    backspaces = random.randint(1, min(3, len(text) - (text.index(char) + 1)))
+                    for _ in range(backspaces):
                         keyboard.press(Key.backspace)
                         keyboard.release(Key.backspace)
-                        time.sleep(random.uniform(0.1, 0.3))
+                        time.sleep(random.uniform(0.08, 0.12))
                     
-                    # Повторный ввод с возможными опечатками
-                    for c in [char] + [random.choice('abcdefghijklmnopqrstuvwxyz') 
-                                     for _ in range(random.randint(0, 2))]:
+                    # Re-type the correct character and add some noise
+                    correct_chars = [char]
+                    # Add random lowercase letters as typos
+                    correct_chars += [random.choice('abcdefghijklmnopqrstuvwxyz') for _ in range(random.randint(1, 2))]
+                    
+                    for c in correct_chars:
                         keyboard.press(c)
                         keyboard.release(c)
-                        time.sleep(random.uniform(0.05, 0.15))
+                        time.sleep(random.uniform(0.08, 0.12))
                         
             except Exception as e:
                 logging.error(f"Typing error: {e}")
                 continue
 
-    @staticmethod
-    def get_clipboard() -> Optional[str]:
-        """Безопасное получение текста из буфера обмена"""
+    def get_clipboard(self) -> Optional[str]:
+        """Safely retrieves text from clipboard"""
         try:
-            # Проверка наличия текста в буфере
             text = pyperclip.paste().strip()
             return text if text else None
         except Exception as e:
@@ -124,7 +141,7 @@ class DeepSeekSolver:
             return None
 
     def process_task(self) -> None:
-        """Основной процесс обработки задачи"""
+        """Main task processing method"""
         logging.info("Hotkey activated, checking clipboard...")
         task = self.get_clipboard()
         
@@ -132,25 +149,25 @@ class DeepSeekSolver:
             logging.warning("No text found in clipboard")
             return
 
-        logging.info(f"Task found: {task[:50]}...")  # Логируем начало задачи
+        logging.info(f"Task found: {task[:50]}...")  # Log the start of the task
         solution = self.send_to_api(task)
         
         if solution:
             logging.info("Received solution, typing...")
             self.human_like_typing(solution)
-            logging.info("Typing completed")
+            logging.info("Typing completed successfully")
         else:
-            logging.error("Failed to get solution from API")
+            logging.error("Failed to obtain solution from API")
 
 def main():
     print("""\nDeepSeek Solver (Ctrl+Alt+S)
 ----------------------------------
-1. Скопируйте задачу в буфер обмена
-2. Нажмите Ctrl+Alt+S для решения
-3. Убедитесь, что курсор в нужном поле
+1. Copy the task to the clipboard
+2. Press Ctrl+Alt+S to solve it
+3. Ensure the cursor is in the desired field
 ----------------------------------""")
 
-    # Явно указываем путь к .env файлу
+    # Explicitly set the path to the .env file
     env_path = os.path.join(os.path.dirname(__file__), '.env')
     if os.path.exists(env_path):
         load_dotenv(env_path)
@@ -164,10 +181,9 @@ def main():
     def on_activate():
         solver.process_task()
 
-    # Исправленные комбинации горячих клавиш
     hotkey = kb.GlobalHotKeys({
         '<ctrl>+<alt>+s': on_activate,
-        '<ctrl>+<shift>+<space>': on_activate  # Ключевое изменение - добавил <> вокруг space
+        '<ctrl>+<shift>+<space>': on_activate
     })
 
     try:
@@ -183,3 +199,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
