@@ -2,7 +2,11 @@ venv
 .venv
 .vscode
 /home/v/Python/Head_hunter_DB_search_project/__pycache__/
+/home/v/Python/Head_hunter_DB_search_project/.env
+/home/v/Python/LeetCode_Stolyarov_training/__pycache__/
 /home/v/Python/CodeWars/__pycache__/
+/home/v/Python/REST_API_LiteStar_CRUD/REST_API_LiteStar_ENV
+/home/v/Python/REST_API_LiteStar_CRUD/.env
 /home/v/Python/request_sender/.venv
 /home/v/Python/c3l4_DAO/labor_1/.env
 /home/v/Python/interview_bot_p/.env
