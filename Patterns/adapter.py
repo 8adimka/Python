@@ -52,8 +52,8 @@ class Printer:
         print("That's all, folks!\n__________________________________________")
 
 
-csv_printer = Printer(adapter=CSVReader())
+# csv_printer = Printer(adapter=CSVReader())
 
-csv_printer.print(CSV)
+# csv_printer.print(CSV)
 
-Printer(adapter=JSONReader()).print(JSON)
+# Printer(adapter=JSONReader()).print(JSON)
