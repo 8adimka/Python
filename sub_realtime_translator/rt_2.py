@@ -4,6 +4,7 @@ import os
 import subprocess
 import sys
 
+import httpx
 from dotenv import load_dotenv
 from websockets.client import connect as websocket_connect
 
@@ -11,19 +12,47 @@ load_dotenv()
 
 # Конфигурация
 DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY")
+DEEPL_API_KEY = os.getenv("DEEPL_API_KEY")
 SAMPLE_RATE = 16000
 CHANNELS = 1
 CHUNK_DURATION = 0.2  # секунды
 CHUNK_SIZE = int(SAMPLE_RATE * CHUNK_DURATION * 2)  # 16-bit PCM = 2 байта
 
 
+def detect_pulse_monitor():
+    """
+    Находит monitor-источник, связанный с текущим активным sink'ом (потоком системного звука).
+    """
+    try:
+        result = subprocess.run(
+            ["pactl", "info"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        for line in result.stdout.splitlines():
+            if line.startswith("Default Sink:"):
+                default_sink = line.split(":", 1)[1].strip()
+                return f"{default_sink}.monitor"
+
+        raise RuntimeError("Default sink not найден в pactl info")
+
+    except Exception as e:
+        print(f"[Monitor detection error]: {e}")
+        return None
+
+
 async def read_ffmpeg_audio():
+    monitor_source = detect_pulse_monitor()
+    if not monitor_source:
+        monitor_source = "alsa_output.pci-0000_00_1f.3.analog-stereo.monitor"
+
     cmd = [
         "ffmpeg",
         "-f",
         "pulse",
         "-i",
-        "alsa_output.pci-0000_00_1f.3.analog-stereo.monitor",  # 👈 monitor, не default!
+        monitor_source,
         "-ac",
         str(CHANNELS),
         "-ar",
@@ -42,6 +71,29 @@ async def read_ffmpeg_audio():
         if not data:
             break
         yield data
+
+
+async def translate_text(text: str) -> str:
+    if not text.strip():
+        return ""
+
+    url = "https://api-free.deepl.com/v2/translate"
+    params = {
+        "auth_key": DEEPL_API_KEY,
+        "text": text,
+        "target_lang": "RU",
+        "source_lang": "EN",
+    }
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.post(url, data=params)
+            response.raise_for_status()
+            result = response.json()
+            return result["translations"][0]["text"]
+        except Exception as e:
+            print(f"[Translation error]: {e}")
+            return text  # fallback to original if error
 
 
 class RealTimeSubtitles:
@@ -100,10 +152,13 @@ class RealTimeSubtitles:
                     transcript = data["channel"]["alternatives"][0]["transcript"]
                     if not transcript.strip():
                         continue
+
+                    translated = await translate_text(transcript)
+
                     if data.get("is_final", False):
-                        self.print_final(transcript)
+                        self.print_final(translated)
                     else:
-                        self.print_interim(transcript)
+                        self.print_interim(translated)
 
             except asyncio.TimeoutError:
                 print("Timeout waiting for Deepgram response")

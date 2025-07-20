@@ -1,7 +1,8 @@
-# Написать функцию, которая вернет строку, где поля не содержат пустых и null значений
-
 import json
+from functools import wraps
 from typing import Callable
+
+# Написать функцию, которая вернет строку, где поля не содержат пустых и null значений
 
 data = """{
 "name": "Alex",
@@ -31,8 +32,6 @@ def get_fitst_match(func, objects: list = None) -> int:
 
 
 print(get_fitst_match(lambda x: x in [1, 7], [2, 3, 4, 7, 1, 6]))
-
-from functools import wraps
 
 
 def decorator(exceptions: list[tuple[Exception, Callable[[], None]]]):
