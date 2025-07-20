@@ -18,6 +18,7 @@ class AbstractTransportFactory(ABC):
     def create_car(self) -> AbstractCar:
         pass
 
+    @abstractmethod
     def create_ship(self) -> AbstractShip:
         pass
 

@@ -29,7 +29,12 @@ class Printer:
         self.facade = Facade()
 
     def print(self, source):
-        for line in self.facade.get_data(source):
+        data = self.facade.get_data(source)
+        if data is None:
+            print("\nNo valid data found!\n__________________________________________")
+            return
+
+        for line in data:
             print(
                 f"\n*We can offer you: {line['Название']}.\nColor - {line['Color']}\nWeight - {line['Weight']}"
             )
