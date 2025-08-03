@@ -1,0 +1,19 @@
+[project]
+name = "analitic-test-task"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Vadim Medintsev",email = "m8adimka@gmail.com"}
+]
+license = {text = "["}
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pandas (>=2.3.1,<3.0.0)",
+    "pyarrow (>=21.0.0,<22.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

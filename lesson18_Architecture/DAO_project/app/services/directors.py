@@ -7,14 +7,14 @@ class DirectorService:
 
     def get_one(self, director_id):
         return self.dao.get_one(director_id)
-    
+
     def get_all(self):
         return self.dao.get_all()
 
-    def create (self, data):
+    def create(self, data):
         return self.dao.create(data)
 
-    def update (self, data):
+    def update(self, data):
         director_id = data.get("id")
         director = self.dao.get_one(director_id)
 
@@ -31,4 +31,3 @@ class DirectorService:
 
     def delete(self, director_id):
         self.dao.delete(director_id)
-        
