@@ -52,7 +52,7 @@ print(next(s2))
 print(s2.__next__())
 try:
     print(next(s2))
-except StopIteration as e:
+except StopIteration:
     print(
         f"The End of the Iteration raise the error -> {StopIteration.__name__}, it's need to be cached!"
     )
