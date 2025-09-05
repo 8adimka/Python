@@ -1,5 +1,6 @@
 import math
 
+
 class Solution:
     def climbStairs(self, n: int) -> int:
         ways = 1  # Все одинарные шаги
@@ -11,8 +12,8 @@ class Solution:
             ways += math.comb(n - k, k)
 
         return ways
-    
-import math
+
+
 class Solution:
     def climbStairs(self, n: int) -> int:
         ways = 1
@@ -21,32 +22,33 @@ class Solution:
         for k in range(1, max_twos):
             ways += math.comb(n - k, k)
 
-        if n%2 == 0:
-            ways +=1
+        if n % 2 == 0:
+            ways += 1
 
         return int(ways)
 
-import math
+
 class Solution:
     def climbStairs(self, n: int) -> int:
         ways = 1
         max_twos = math.ceil(n / 2)
 
         for k in range(1, max_twos):
-            ways += math.factorial(n - k)/(math.factorial(k)*math.factorial(n - 2*k))
+            ways += math.factorial(n - k) / (
+                math.factorial(k) * math.factorial(n - 2 * k)
+            )
 
-        if n%2 == 0:
-            ways +=1
+        if n % 2 == 0:
+            ways += 1
 
         return int(ways)
-    
-class Solution:
 
+
+class Solution:
     def __init__(self):
         self.ns = {1: 1, 2: 2}
 
     def climbStairs(self, n: int) -> int:
         if n not in self.ns:
-            self.ns[n] = self.climbStairs(n-1) + self.climbStairs(n-2)
+            self.ns[n] = self.climbStairs(n - 1) + self.climbStairs(n - 2)
         return self.ns[n]
-    
