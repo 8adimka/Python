@@ -45,7 +45,7 @@ def sync_worker1(connections: List[Connect]):
                 con.write(new_file)
 
 
-async def right_con_handler(con: Connect, pool: ProcessPoolExecutor):
+async def long_term_con_handler(con: Connect, pool: ProcessPoolExecutor):
     loop = asyncio.get_running_loop()
     buffer = None
     while True:
@@ -63,10 +63,10 @@ async def right_con_handler(con: Connect, pool: ProcessPoolExecutor):
         await asyncio.sleep(0.1)  # чтобы не крутить бесконечный цикл без паузы
 
 
-async def right_async_worker(connections: List[Connect]):
+async def long_term_async_worker(connections: List[Connect]):
     with ProcessPoolExecutor() as pool:
         tasks = [
-            asyncio.create_task(right_con_handler(con, pool)) for con in connections
+            asyncio.create_task(long_term_con_handler(con, pool)) for con in connections
         ]
         await asyncio.gather(*tasks)
 
@@ -89,16 +89,16 @@ async def async_worker2(connections: List[Connect]):
 
 if __name__ == "__main__":
     start = time.time()
-    asyncio.run(right_async_worker([Connect(i) for i in range(20)]))
+    sync_worker1([Connect(i) for i in range(20)])
+    print(f"Sync done in {time.time() - start} sec")
+
+    start = time.time()
+    asyncio.run(async_worker2([Connect(i) for i in range(20)]))
     print(f"Right_async done in {time.time() - start} sec")
 
     start = time.time()
     asyncio.run(async_worker2([Connect(i) for i in range(20)]))
     print(f"Simple_async done in {time.time() - start} sec")
-
-    start = time.time()
-    sync_worker1([Connect(i) for i in range(20)])
-    print(f"Sync done in {time.time() - start} sec")
 
 
 def heavy_task(n):

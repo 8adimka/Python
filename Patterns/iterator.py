@@ -20,3 +20,7 @@ for letter in Letters():
 
 for l in Letters("1,2,3"):
     print(l)
+
+ar = [1, 2, 3, 4, 5]
+
+print(list(reversed(ar)))
